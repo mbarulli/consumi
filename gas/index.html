@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Consumi e costi del gas — andamento storico</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gridjs@5.0.2/dist/gridjs.umd.js" integrity="sha384-/XXDzxe4FsGiAe50i/u9pY/Vy/uX654MHB1xoc1BJNnH1WXHhqHga9g3q5tF4gj7" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/gridjs@5.0.2/dist/theme/mermaid.min.css" rel="stylesheet">
+<style>
+  :root{
+    color-scheme: light;
+    --bg:#f7f8fa; --card:#ffffff; --ink:#1c2430; --muted:#5b6572;
+    --gas:#2f6fed; --acc:#f2a007; --line:#e2e5ea; --good:#1c9d63; --bad:#e0483a;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 60px;}
+  h1{font-size:22px;margin:0 0 4px;}
+  .subtitle{color:var(--muted);font-size:14px;margin:0 0 24px;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:28px;}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;}
+  .kpi .label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;}
+  .kpi .value{font-size:22px;font-weight:600;margin-top:4px;}
+  .kpi .sub{font-size:12px;color:var(--muted);margin-top:2px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:22px;}
+  .card h2{font-size:15px;margin:0 0 14px;}
+  .chart-box{position:relative;height:320px;}
+  .chart-box.tall{height:360px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media (max-width:860px){.grid2{grid-template-columns:1fr;}}
+  .legend-row{display:flex;gap:18px;font-size:12px;color:var(--muted);margin-top:6px;}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;}
+  .notes{font-size:13px;color:var(--muted);line-height:1.6;}
+  .notes b{color:var(--ink);}
+  #table{font-size:13px;}
+  .gridjs-wrapper{border-radius:10px;}
+  .footer{font-size:12px;color:var(--muted);text-align:center;margin-top:10px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Consumi e costi del gas — andamento storico</h1>
+  <p class="subtitle">34 bollette analizzate · dal 04/10/2020 al 30/04/2026 · fornitori: SGR Servizi, Cogeme Nuove Energie, A2A Energia</p>
+  <p style="margin-top:-16px;margin-bottom:24px;"><a href="../" style="color:var(--muted);font-size:13px;">← altri report</a></p>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="card">
+    <h2>Andamento del consumo per bolletta (Smc)</h2>
+    <div class="chart-box"><canvas id="consumptionChart"></canvas></div>
+  </div>
+
+  <div class="card">
+    <h2>Ripartizione della spesa per bolletta — materia gas vs. accessori (trasporto, oneri, imposte, IVA)</h2>
+    <div class="chart-box"><canvas id="costChart"></canvas></div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:var(--gas)"></span>Costo materia gas naturale</span>
+      <span><span class="dot" style="background:var(--acc)"></span>Costo accessori (trasporto, oneri di sistema, imposte, IVA)</span>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>Consumo annuo (Smc)</h2>
+      <div class="chart-box"><canvas id="yearConsumptionChart"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Spesa annua — gas vs. accessori (€)</h2>
+      <div class="chart-box"><canvas id="yearCostChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Prezzo medio pagato per Smc (materia gas + accessori)</h2>
+    <div class="chart-box"><canvas id="priceChart"></canvas></div>
+    <div class="legend-row" id="priceLegend"></div>
+  </div>
+
+  <div class="card">
+    <h2>Dettaglio bollette</h2>
+    <div id="table"></div>
+  </div>
+
+  <div class="card notes">
+    <h2 style="margin-bottom:8px;">Note sui dati</h2>
+    <p><b>Ott–Dic 2022 (A2A):</b> il totale (652,00 €) risulta inferiore al costo della sola materia gas (656,87 €) perché la bolletta include uno storno di -100,83 € per una lettura errata: in questo caso la quota "accessori" nel grafico è negativa.</p>
+    <p><b>Apr–Giu 2023 (A2A):</b> bolletta di conguaglio tariffario che fattura solo 31 Smc residui (coda del periodo, non ancora fatturati nelle bollette precedenti), da cui l'importo molto contenuto (40,00 €).</p>
+    <p><b>2020 e 2026:</b> anni parziali — la cartella parte da ottobre 2020 e l'ultima bolletta disponibile arriva ad aprile 2026, quindi i totali annuali di questi due anni non sono confrontabili direttamente con gli anni completi.</p>
+    <p><b>Grafici "Consumo annuo" e "Spesa annua":</b> le bollette che attraversano il 31 dicembre (es. 30/12/2022–28/02/2023, quasi tutta consumata a gennaio-febbraio) vengono ripartite pro-rata sui due anni in base ai giorni, invece di essere assegnate per intero all'anno di inizio periodo — altrimenti il 2022 risulterebbe artificialmente gonfiato di circa 700 Smc "rubati" al 2023. Con questa correzione il 2022 (~2.160 Smc pro-rata) resta comunque l'anno di consumo più alto della serie, ma in linea con 2021 e 2023 (~1.750-1.810 Smc) anziché un picco isolato.</p>
+    <p>Metodo: per ciascuna bolletta, "costo materia gas" è la voce esplicita "spesa/spese per la materia gas naturale" (o equivalente); "costo accessori" = totale bolletta − costo materia gas (include trasporto, gestione contatore, oneri di sistema, accise, IVA, conguagli e arrotondamenti). Dati estratti automaticamente dal testo dei PDF; verificati a campione sui casi anomali.</p>
+  </div>
+
+  <p class="footer">Generato a partire dalle bollette del gas dell'abitazione, dal 2020 al 2026.</p>
+</div>
+
+<script>
+const bills = [
+{id:"1Uk6NjEmojE9FGXnSd0WZH1pZdCU6F5yZ",supplier:"SGR",start:"2020-10-04",end:"2020-11-30",smc:111,gas:31.75,acc:57.25,tot:89.00},
+{id:"1kOn70q_GxZIJJ8AY8zF4TsR1p5n6uyx_",supplier:"SGR",start:"2020-12-01",end:"2021-02-02",smc:538,gas:119.79,acc:220.21,tot:340.00},
+{id:"1Ll68b8wdSM-1Afejc8m3tg3DNju_NhBI",supplier:"SGR",start:"2021-02-03",end:"2021-03-03",smc:257,gas:60.96,acc:120.54,tot:181.50},
+{id:"1g2pMdnfjdN5iwsxfNiwEgHY6e6UPMYs_",supplier:"SGR",start:"2021-03-04",end:"2021-05-02",smc:213,gas:60.30,acc:113.20,tot:173.50},
+{id:"1u_lkGCIWBDmFdy12kokAKGhfhLzN9RMc",supplier:"SGR",start:"2021-05-03",end:"2021-07-02",smc:24,gas:16.29,acc:20.21,tot:36.50},
+{id:"1-it2uLwHpZZP4e3-dUYOy53vobFiaNAB",supplier:"SGR",start:"2021-07-03",end:"2021-09-04",smc:13,gas:14.69,acc:15.81,tot:30.50},
+{id:"1DMPW0JyTWR46NdMyMjzG0nBB_YcLlrPR",supplier:"SGR",start:"2021-09-05",end:"2021-10-31",smc:186,gas:106.41,acc:82.09,tot:188.50},
+{id:"1mfAF5sxZkpCS5DTubX1puKlLOyJpg-7o",supplier:"SGR",start:"2021-11-01",end:"2022-01-03",smc:873,gas:486.88,acc:344.12,tot:831.00},
+{id:"1AGnXrfJkKX-wSkX1x-yFk7VfgM3ou-mM",supplier:"SGR",start:"2022-01-04",end:"2022-01-31",smc:481,gas:436.42,acc:200.40,tot:636.82},
+{id:"1vWwMA6E_cM0kJwvZP0FGUXvxgkuohyAX",supplier:"Cogeme",start:"2022-02-01",end:"2022-03-31",smc:764,gas:967.21,acc:343.67,tot:1310.88,note:"picco crisi energetica"},
+{id:"1VSjRyieF8M_LHfUGU8lVWFSGGsbL0qEo",supplier:"Cogeme",start:"2022-04-01",end:"2022-05-31",smc:256,gas:316.76,acc:90.40,tot:407.16},
+{id:"1qd071eZPP9Q7l6rFbOmjC1KMQ-dOKuAZ",supplier:"Cogeme",start:"2022-06-01",end:"2022-07-31",smc:16,gas:35.86,acc:10.32,tot:46.18},
+{id:"11bQLfIHtwiSMCI1NL_mnF6z-KUZZZ6tV",supplier:"Cogeme",start:"2022-08-01",end:"2022-09-30",smc:10,gas:33.10,acc:8.13,tot:41.23},
+{id:"1s8GPkHljPdWCKvweZGJLEFC_RwdNZcCR",supplier:"A2A",start:"2022-10-01",end:"2022-12-31",smc:578,gas:656.87,acc:-4.87,tot:652.00,note:"storno lettura errata"},
+{id:"1CMlg21HX1U4KvIpWJb28bWp_gU0qVS5S",supplier:"A2A",start:"2022-12-30",end:"2023-02-28",smc:755,gas:512.23,acc:107.77,tot:620.00},
+{id:"1rlfWwDdDfjGWTPX9bakvH7kAMJhrg2dd",supplier:"A2A",start:"2023-02-28",end:"2023-04-30",smc:389,gas:205.15,acc:95.85,tot:301.00},
+{id:"1C41AI_78L74X_UnKuMsGgKUEW2VE0PWg",supplier:"A2A",start:"2023-04-30",end:"2023-06-30",smc:31,gas:23.26,acc:16.74,tot:40.00,note:"conguaglio coda periodo"},
+{id:"14KqO0P7CUIF2IlDEcznrJb_YN2aNj4Ij",supplier:"A2A",start:"2023-07-01",end:"2023-08-31",smc:15,gas:17.23,acc:12.77,tot:30.00},
+{id:"1MhzJTXDsezVp0jvAfrcPlmGvdapsM2SQ",supplier:"A2A",start:"2023-08-01",end:"2023-10-31",smc:44,gas:34.07,acc:24.93,tot:59.00},
+{id:"1NMCgWKQV4WomSbOzPLAmKs5mjiG1G2bz",supplier:"A2A",start:"2023-11-01",end:"2023-12-31",smc:544,gas:250.97,acc:277.03,tot:528.00},
+{id:"1rjbfj4xChES7u9cbr7NZQbdoYntwhL9U",supplier:"A2A",start:"2024-01-01",end:"2024-02-29",smc:674,gas:240.13,acc:371.87,tot:612.00},
+{id:"14evq2EymX8BeujAnZK9yt3AmPjup3YB0",supplier:"A2A",start:"2024-03-01",end:"2024-04-30",smc:319,gas:125.28,acc:211.72,tot:337.00},
+{id:"1YUrL31l1kZqjsKGyPCohoYxoKyL6PREz",supplier:"A2A",start:"2024-05-01",end:"2024-06-30",smc:37,gas:37.53,acc:37.47,tot:75.00},
+{id:"1_7GH2G7XeIOA81C_2Y8DqRi2bx_UoJDv",supplier:"A2A",start:"2024-07-01",end:"2024-08-31",smc:12,gas:28.93,acc:21.07,tot:50.00},
+{id:"1B0dQspigrs2oMZ85zz7_8JDLKTf7Egr8",supplier:"A2A",start:"2024-09-01",end:"2024-10-31",smc:39,gas:40.91,acc:40.09,tot:81.00},
+{id:"18fxxOTRrLV6bQEFO7PRf4QN_Vbe0mXMe",supplier:"A2A",start:"2024-11-01",end:"2024-12-31",smc:660,gas:357.11,acc:471.89,tot:829.00},
+{id:"1N0MbsiFLxeG2daYuC4RqFjSNmVhWv0Xr",supplier:"A2A",start:"2025-01-01",end:"2025-02-28",smc:701,gas:416.43,acc:419.57,tot:836.00},
+{id:"1ubTZxCQlVF9HdIWygJw1keIP37ApBDAm",supplier:"A2A",start:"2025-02-02",end:"2025-04-30",smc:622,gas:160.35,acc:212.65,tot:373.00},
+{id:"1VflSokHHI9mhi8klSA2btPSTScwfdZwr",supplier:"A2A",start:"2025-05-01",end:"2025-06-30",smc:23,gas:33.45,acc:28.55,tot:62.00},
+{id:"1tPgAnGiICBX1LlVMSn0cqq4tSWy_Nof8",supplier:"A2A",start:"2025-07-01",end:"2025-08-31",smc:16,gas:30.29,acc:23.71,tot:54.00},
+{id:"1Jh3nrhnzzTgo8YJENiGNWQxQamg9hJnm",supplier:"A2A",start:"2025-09-01",end:"2025-10-31",smc:35,gas:36.85,acc:37.15,tot:74.00},
+{id:"1IU4H57ttSfLaz9RvlZLr1j-L_ecejaqz",supplier:"A2A",start:"2025-11-01",end:"2025-12-31",smc:651,gas:247.04,acc:431.96,tot:679.00},
+{id:"1kFaruajRZxAvggWSUFGVoc_2EMh71O2p",supplier:"A2A",start:"2026-01-01",end:"2026-02-28",smc:753,gas:325.51,acc:449.49,tot:775.00},
+{id:"1o_DsBHu_Bwg9yVwKRoDxD9bzRxcyr9kb",supplier:"A2A",start:"2026-03-01",end:"2026-04-30",smc:403,gas:244.67,acc:292.33,tot:537.00}
+];
+
+const MESI = ["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"];
+function fmtIt(d){ const dt=new Date(d+"T00:00:00"); return dt.getDate()+" "+MESI[dt.getMonth()]+" "+String(dt.getFullYear()).slice(2); }
+function periodLabel(b){ return fmtIt(b.start)+" – "+fmtIt(b.end); }
+function eur(n){ return n.toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2})+" €"; }
+function smc(n){ return n.toLocaleString("it-IT")+" Smc"; }
+
+// KPIs
+const totSmc = bills.reduce((s,b)=>s+b.smc,0);
+const totGas = bills.reduce((s,b)=>s+b.gas,0);
+const totAcc = bills.reduce((s,b)=>s+b.acc,0);
+const totTot = bills.reduce((s,b)=>s+b.tot,0);
+const avgPrice = totTot/totSmc;
+const gasShare = totGas/totTot*100;
+const accShare = totAcc/totTot*100;
+
+const kpis = [
+  {label:"Consumo totale", value:smc(totSmc), sub:"04/10/2020 → 30/04/2026"},
+  {label:"Spesa totale", value:eur(totTot), sub:bills.length+" bollette"},
+  {label:"Quota materia gas", value:gasShare.toFixed(0)+"%", sub:eur(totGas)},
+  {label:"Quota accessori", value:accShare.toFixed(0)+"%", sub:eur(totAcc)+" — trasporto, oneri, imposte, IVA"},
+  {label:"Prezzo medio", value:avgPrice.toFixed(3)+" €/Smc", sub:"media sull'intero periodo"},
+];
+document.getElementById("kpis").innerHTML = kpis.map(k=>`
+  <div class="kpi"><div class="label">${k.label}</div><div class="value">${k.value}</div><div class="sub">${k.sub}</div></div>
+`).join("");
+
+const labels = bills.map(periodLabel);
+
+// Consumption chart
+new Chart(document.getElementById("consumptionChart"), {
+  type:"bar",
+  data:{ labels, datasets:[{ label:"Consumo (Smc)", data: bills.map(b=>b.smc), backgroundColor:"#2f6fed99", borderColor:"#2f6fed", borderWidth:1, borderRadius:4 }]},
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => smc(ctx.parsed.y) } } },
+    scales:{ x:{ ticks:{ maxRotation:60, minRotation:60, autoSkip:false, font:{size:10} } }, y:{ title:{display:true,text:"Smc"} } }
+  }
+});
+
+// Cost breakdown stacked chart
+new Chart(document.getElementById("costChart"), {
+  type:"bar",
+  data:{ labels, datasets:[
+    { label:"Materia gas", data: bills.map(b=>b.gas), backgroundColor:"#2f6fed" },
+    { label:"Accessori", data: bills.map(b=>b.acc), backgroundColor:"#f2a007" },
+  ]},
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ctx.dataset.label+": "+eur(ctx.parsed.y) } } },
+    scales:{ x:{ stacked:true, ticks:{ maxRotation:60, minRotation:60, autoSkip:false, font:{size:10} } }, y:{ stacked:true, title:{display:true,text:"€"} } }
+  }
+});
+
+// Yearly aggregation — bills that straddle 31 Dic/1 Gen are split pro-rata (per giorno)
+// tra i due anni coinvolti, invece di essere assegnate per intero all'anno di inizio
+// periodo: altrimenti una bolletta come "30/12/2022 - 28/02/2023" (quasi tutta
+// consumata a gennaio/febbraio 2023) finirebbe interamente nel 2022, gonfiandolo.
+const years = {};
+function addToYear(y, smc, gas, acc, tot){
+  y = String(y);
+  years[y] = years[y] || {smc:0, gas:0, acc:0, tot:0};
+  years[y].smc += smc; years[y].gas += gas; years[y].acc += acc; years[y].tot += tot;
+}
+bills.forEach(b=>{
+  const start = new Date(b.start+"T00:00:00");
+  const end = new Date(b.end+"T00:00:00");
+  const totalDays = Math.max(1, (end-start)/86400000);
+  if(start.getFullYear() === end.getFullYear()){
+    addToYear(start.getFullYear(), b.smc, b.gas, b.acc, b.tot);
+  } else {
+    let cur = start;
+    while(cur < end){
+      const yearEnd = new Date(cur.getFullYear()+1, 0, 1);
+      const segEnd = end < yearEnd ? end : yearEnd;
+      const frac = (segEnd-cur)/86400000/totalDays;
+      addToYear(cur.getFullYear(), b.smc*frac, b.gas*frac, b.acc*frac, b.tot*frac);
+      cur = segEnd;
+    }
+  }
+});
+const yearKeys = Object.keys(years).sort();
+
+new Chart(document.getElementById("yearConsumptionChart"), {
+  type:"bar",
+  data:{ labels: yearKeys, datasets:[{ label:"Consumo annuo", data: yearKeys.map(y=>Math.round(years[y].smc)), backgroundColor:"#2f6fed99", borderColor:"#2f6fed", borderWidth:1, borderRadius:4 }]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => smc(ctx.parsed.y) } } },
+    scales:{ y:{ title:{display:true,text:"Smc"} } } }
+});
+
+new Chart(document.getElementById("yearCostChart"), {
+  type:"bar",
+  data:{ labels: yearKeys, datasets:[
+    { label:"Materia gas", data: yearKeys.map(y=>+years[y].gas.toFixed(2)), backgroundColor:"#2f6fed" },
+    { label:"Accessori", data: yearKeys.map(y=>+years[y].acc.toFixed(2)), backgroundColor:"#f2a007" },
+  ]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{position:"bottom"}, tooltip:{ callbacks:{ label: ctx => ctx.dataset.label+": "+eur(ctx.parsed.y) } } },
+    scales:{ x:{ stacked:true }, y:{ stacked:true, title:{display:true,text:"€"} } } }
+});
+
+// Price per Smc trend — colored by supplier
+const supplierColors = { SGR:"#8e44ad", Cogeme:"#16a085", A2A:"#e0483a" };
+function colorFor(idx){ return supplierColors[bills[idx].supplier] || "#5b6572"; }
+function alphaColor(hex, a){ return hex + a; }
+
+// weighted average price per Smc, per supplier (totale speso / totale Smc), drawn only
+// across the x-range where that supplier's bills actually appear
+const supplierOrder = ["SGR","Cogeme","A2A"];
+const supplierAvg = {};
+const supplierRange = {};
+supplierOrder.forEach(s=>{
+  let sumTot=0, sumSmc=0, first=-1, last=-1;
+  bills.forEach((b,i)=>{
+    if(b.supplier!==s) return;
+    sumTot+=b.tot; sumSmc+=b.smc;
+    if(first===-1) first=i;
+    last=i;
+  });
+  // extend the range one point past the last bill of this supplier: the connecting
+  // segment into the next supplier's first point is still colored by this supplier
+  // (segment color follows its start point), so the fill/line visually reaches that
+  // point — the dashed average should reach it too, or it looks like it stops short.
+  if(last>=0 && last<bills.length-1) last += 1;
+  if(sumSmc>0){ supplierAvg[s]=sumTot/sumSmc; supplierRange[s]=[first,last]; }
+});
+
+const avgDatasets = supplierOrder.filter(s=>supplierAvg[s]!==undefined).map(s=>{
+  const [first,last]=supplierRange[s];
+  return {
+    label:`Media ${s}: ${supplierAvg[s].toFixed(3)} €/Smc`,
+    data: bills.map((b,i)=> (i>=first && i<=last) ? +supplierAvg[s].toFixed(3) : null),
+    borderColor: supplierColors[s], borderDash:[6,4], borderWidth:1.5,
+    pointRadius:0, fill:false, spanGaps:false, tension:0
+  };
+});
+
+new Chart(document.getElementById("priceChart"), {
+  type:"line",
+  data:{ labels, datasets:[{
+    label:"€/Smc", data: bills.map(b=> b.smc>0 ? +(b.tot/b.smc).toFixed(3) : null),
+    borderColor:"#5b6572", backgroundColor:"#5b657222", fill:true, tension:0.25, spanGaps:true,
+    pointRadius:3,
+    pointBackgroundColor: bills.map((b,i)=>colorFor(i)),
+    pointBorderColor: bills.map((b,i)=>colorFor(i)),
+    segment:{
+      borderColor: ctx => colorFor(ctx.p0DataIndex),
+      backgroundColor: ctx => alphaColor(colorFor(ctx.p0DataIndex), "33")
+    }
+  }, ...avgDatasets]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ctx.dataset.label==="€/Smc" ? (bills[ctx.dataIndex].supplier+": "+ctx.parsed.y+" €/Smc") : ctx.dataset.label } } },
+    scales:{ x:{ ticks:{ maxRotation:60, minRotation:60, autoSkip:false, font:{size:10} } }, y:{ title:{display:true,text:"€/Smc"} } } }
+});
+document.getElementById("priceLegend").innerHTML = supplierOrder.filter(s=>supplierAvg[s]!==undefined)
+  .map(s=>`<span><span class="dot" style="background:${supplierColors[s]}"></span>${s} (media ${supplierAvg[s].toFixed(3)} €/Smc, tratteggio)</span>`).join("");
+
+// Table
+new gridjs.Grid({
+  columns:["Fornitore","Dal","Al","Consumo (Smc)","Materia gas (€)","Accessori (€)","Totale (€)","€/Smc","Note"],
+  data: bills.map(b=>[
+    b.supplier, fmtIt(b.start), fmtIt(b.end), b.smc,
+    b.gas.toFixed(2), b.acc.toFixed(2), b.tot.toFixed(2),
+    (b.tot/b.smc).toFixed(3), b.note||""
+  ]),
+  sort:true, search:true, pagination:{ limit:12 },
+  className:{ table:"gridjs-table" }
+}).render(document.getElementById("table"));
+</script>
+</body>
+</html>
