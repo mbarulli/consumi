@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consumi e costi dell'energia elettrica — andamento storico</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gridjs@5.0.2/dist/gridjs.umd.js" integrity="sha384-/XXDzxe4FsGiAe50i/u9pY/Vy/uX654MHB1xoc1BJNnH1WXHhqHga9g3q5tF4gj7" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/gridjs@5.0.2/dist/theme/mermaid.min.css" rel="stylesheet">
+<style>
+  :root{ color-scheme: light; --bg:#f7f8fa; --card:#ffffff; --ink:#1c2430; --muted:#5b6572; --ene:#e0483a; --acc:#f2a007; --line:#e2e5ea; }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 60px;}
+  .back{display:inline-block;font-size:13px;color:var(--muted);text-decoration:none;margin-bottom:14px;}
+  .back:hover{color:#2f6fed;}
+  h1{font-size:22px;margin:0 0 4px;}
+  .subtitle{color:var(--muted);font-size:14px;margin:0 0 24px;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:28px;}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;}
+  .kpi .label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;}
+  .kpi .value{font-size:22px;font-weight:600;margin-top:4px;}
+  .kpi .sub{font-size:12px;color:var(--muted);margin-top:2px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:22px;}
+  .card h2{font-size:15px;margin:0 0 14px;}
+  .chart-box{position:relative;height:320px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media (max-width:860px){.grid2{grid-template-columns:1fr;}}
+  .legend-row{display:flex;flex-wrap:wrap;gap:18px;font-size:12px;color:var(--muted);margin-top:6px;}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;}
+  .notes{font-size:13px;color:var(--muted);line-height:1.6;}
+  .notes b{color:var(--ink);}
+  #table{font-size:13px;}
+  .gridjs-wrapper{border-radius:10px;}
+  .footer{font-size:12px;color:var(--muted);text-align:center;margin-top:10px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../">&larr; Tutti i report</a>
+  <h1>Consumi e costi dell'energia elettrica — andamento storico</h1>
+  <p class="subtitle">54 bollette analizzate · dal 01/12/2020 al 31/05/2026 · fornitori: SGR Luce, Cogeme Nuove Energie, A2A Energia</p>
+  <div class="kpis" id="kpis"></div>
+  <div class="card">
+    <h2>Andamento del consumo per bolletta (kWh)</h2>
+    <div class="chart-box"><canvas id="consumptionChart"></canvas></div>
+  </div>
+  <div class="card">
+    <h2>Ripartizione della spesa per bolletta — materia energia vs. accessori (trasporto, oneri, imposte, IVA)</h2>
+    <div class="chart-box"><canvas id="costChart"></canvas></div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:var(--ene)"></span>Costo materia energia</span>
+      <span><span class="dot" style="background:var(--acc)"></span>Costo accessori (trasporto, oneri di sistema, imposte, IVA)</span>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h2>Consumo annuo (kWh)</h2><div class="chart-box"><canvas id="yearConsumptionChart"></canvas></div></div>
+    <div class="card"><h2>Spesa annua — materia energia vs. accessori (€)</h2><div class="chart-box"><canvas id="yearCostChart"></canvas></div></div>
+  </div>
+  <div class="card">
+    <h2>Prezzo medio pagato per kWh (materia energia + accessori)</h2>
+    <div class="chart-box"><canvas id="priceChart"></canvas></div>
+    <div class="legend-row" id="priceLegend"></div>
+  </div>
+  <div class="card"><h2>Dettaglio bollette</h2><div id="table"></div></div>
+  <div class="card notes">
+    <h2 style="margin-bottom:8px;">Note sui dati</h2>
+    <p><b>Crisi energetica 2022:</b> il prezzo della materia energia è esploso nel 2022, con il picco nella bolletta Cogeme lug–ago 2022 (0,59 €/kWh solo di materia energia, contro ~0,12 €/kWh del 2021). Il 2022 resta di gran lunga l'anno più costoso della serie (~1.730 € contro ~1.000 € degli anni successivi), pur con consumi in linea con gli altri anni.</p>
+    <p><b>Passaggi di fornitore:</b> SGR Luce fino a ottobre 2021 (cessazione), poi Cogeme Nuove Energie da novembre 2021 a settembre 2022, quindi A2A Energia da ottobre 2022 a oggi. Da luglio 2023 A2A applica l'offerta a prezzo fisso "Noi2" e passa alla fatturazione mensile (prima bimestrale).</p>
+    <p><b>Bolletta di novembre 2025:</b> la bolletta effettivamente pagata è stata di 334 € perché includeva un <b>conguaglio una-tantum di 220,72 € per 5.607 kWh</b> (adeguamento consumi mag 2024 – ott 2025, a chiusura del vecchio contatore sostituito il 01/12/2025). Per non falsare i grafici, qui è riportato solo il costo di competenza del mese (309 kWh, ~114 €); il conguaglio è escluso.</p>
+    <p><b>Servizio Elettrico Nazionale (Maggior Tutela) nov–dic 2021:</b> due bollette del servizio di default (attivate erroneamente e poi chiuse con rimborso del deposito cauzionale) si sovrapponevano alle letture Cogeme dello stesso periodo e sono state <b>escluse</b> per non contare due volte gli stessi kWh.</p>
+    <p><b>Grafici "Consumo annuo" e "Spesa annua":</b> le bollette bimestrali che attraversano il 31 dicembre vengono ripartite pro-rata sui due anni in base ai giorni. <b>2020 e 2026 sono anni parziali</b> (contrassegnati con *) e i loro totali non sono confrontabili con gli anni completi.</p>
+    <p>Metodo: "costo materia energia" è la voce esplicita "spesa per la materia energia" (o, nelle nuove bollette A2A, la "spesa per la vendita di energia elettrica"); "costo accessori" = totale bolletta − costo materia energia (trasporto, oneri di sistema, accise, IVA, arrotondamenti). Il totale è al netto del <b>canone RAI</b> (riscosso in bolletta ma non pertinente all'energia).</p>
+  </div>
+  <p class="footer">Generato a partire dalle bollette dell'energia elettrica dell'abitazione, dal 2020 al 2026.</p>
+</div>
+<script>
+const bills = [
+{id:"1uYN6-VHgacIlA6Nbcb5mmvIjwNa-Wawl",supplier:"SGR",start:"2020-12-01",end:"2021-01-31",kwh:533,energy:61.3,acc:57.73,tot:119.03},
+{id:"1OsGOLEMcP56WGzR5S86QBrqJjHrOPsJn",supplier:"SGR",start:"2021-02-01",end:"2021-03-31",kwh:483,energy:55.84,acc:53.35,tot:109.19},
+{id:"1RU-LR-YQutJo5XEZjrqgjLpruxcFdp4T",supplier:"SGR",start:"2021-04-01",end:"2021-05-31",kwh:419,energy:50.84,acc:46.32,tot:97.16},
+{id:"1uorW_mJgqBOAeBOov-YCpae3UnWLXcF_",supplier:"SGR",start:"2021-06-01",end:"2021-07-31",kwh:376,energy:45.77,acc:38.24,tot:84.01},
+{id:"1UFSX3YHE8f6PUk9cRMF9BT1CJGlISeMj",supplier:"SGR",start:"2021-08-01",end:"2021-09-30",kwh:477,energy:54.38,acc:42.53,tot:96.91},
+{id:"1kMs2txEWdXhkq9gCqmLpu9dht43fGSs8",supplier:"SGR",start:"2021-10-01",end:"2021-10-31",kwh:318,energy:35.07,acc:19.71,tot:54.78,note:"ultima SGR (cessazione)"},
+{id:"1TJl2CjTXrL1Hn5F-en9kKSMLeZmOPgFu",supplier:"Cogeme",start:"2021-11-01",end:"2021-11-30",kwh:285,energy:35.02,acc:19.0,tot:54.02},
+{id:"165HZ3HDe2EX3XmAtEE690AFys6kulQai",supplier:"Cogeme",start:"2021-12-01",end:"2021-12-31",kwh:418,energy:50.73,acc:29.12,tot:79.85},
+{id:"1n2BwQigH8CUy_o0yatzSVhEm1fT92-eS",supplier:"Cogeme",start:"2022-01-01",end:"2022-01-31",kwh:418,energy:123.43,acc:35.81,tot:159.24,note:"inizio crisi energetica"},
+{id:"1mBhgy1_5Pmw8sDejlqi-fWxyN8fuPzkw",supplier:"Cogeme",start:"2022-02-01",end:"2022-02-28",kwh:327,energy:92.55,acc:26.27,tot:118.82},
+{id:"15hPNzqneT85nCChDP5t36jJbkb3CmVkZ",supplier:"Cogeme",start:"2022-03-01",end:"2022-04-30",kwh:622,energy:217.52,acc:60.13,tot:277.65},
+{id:"1vq_KOSuStEURhRnygnX1jaHQDI1W82M8",supplier:"Cogeme",start:"2022-05-01",end:"2022-06-30",kwh:562,energy:179.21,acc:50.94,tot:230.15},
+{id:"1cPUTW8dYLR21hJM87gJUDckFgGuf7qRO",supplier:"Cogeme",start:"2022-07-01",end:"2022-08-31",kwh:581,energy:341.28,acc:68.26,tot:409.54,note:"picco crisi energetica"},
+{id:"1eDq49zS57GPQGyPGG1D3PpVQ4Ey_F_oM",supplier:"Cogeme",start:"2022-09-01",end:"2022-09-30",kwh:223,energy:116.54,acc:24.7,tot:141.24,note:"ultima Cogeme (chiusura)"},
+{id:"1HIFlrKkLz5FEC2Kx6rCONHH23EWto0CR",supplier:"A2A",start:"2022-10-01",end:"2022-10-31",kwh:287,energy:76.9,acc:22.1,tot:99.0},
+{id:"1Ghg-bf69PEvCuVPB14P4tU6qg2FNyoDZ",supplier:"A2A",start:"2022-11-01",end:"2022-12-31",kwh:729,energy:233.44,acc:63.56,tot:297.0},
+{id:"145RGxtGmwSqGrpmKERWZK0SujthNIN3b",supplier:"A2A",start:"2023-01-01",end:"2023-02-28",kwh:770,energy:169.1,acc:57.9,tot:227.0},
+{id:"1cJg04L9mTwyOypnRuz0l8ttUvTrwCp10",supplier:"A2A",start:"2023-03-01",end:"2023-04-30",kwh:625,energy:112.87,acc:55.13,tot:168.0},
+{id:"1kwk_-Nd2ZxFNTC_h1izZL-xl9UKRHEF6",supplier:"A2A",start:"2023-05-01",end:"2023-06-30",kwh:492,energy:74.98,acc:51.02,tot:126.0},
+{id:"15BY6eCWhcRLkzBpEwKAB4BCOV57tuSwj",supplier:"A2A",start:"2023-07-01",end:"2023-07-31",kwh:326,energy:57.64,acc:33.36,tot:91.0,note:"passaggio offerta Noi2 (prezzo fisso), fatturazione mensile"},
+{id:"1BVywnu2DuSEOEYZvus9d0SBgdQU0B7q7",supplier:"A2A",start:"2023-08-01",end:"2023-08-31",kwh:270,energy:45.7,acc:27.3,tot:73.0},
+{id:"183eOGy-C9Wfdle_3y6EaQgaxJ6av2py0",supplier:"A2A",start:"2023-09-01",end:"2023-09-30",kwh:248,energy:42.85,acc:26.15,tot:69.0},
+{id:"1aiNxCq5tGAecKFcTQBp9J52dRXR-bfle",supplier:"A2A",start:"2023-10-01",end:"2023-10-31",kwh:278,energy:48.15,acc:28.85,tot:77.0},
+{id:"1RNzbAsELxST8N3o54JKpUjasvb_Vbxsu",supplier:"A2A",start:"2023-11-01",end:"2023-11-30",kwh:333,energy:56.11,acc:34.89,tot:91.0},
+{id:"1Y3qj6YNH0HrTSQ6RduwNKxSXxTcXsrbJ",supplier:"A2A",start:"2023-12-01",end:"2023-12-31",kwh:387,energy:65.35,acc:39.65,tot:105.0},
+{id:"1RqBeRimaJjYJBzje08Tj9C4Xc2SAnSzq",supplier:"A2A",start:"2024-01-01",end:"2024-01-31",kwh:403,energy:66.45,acc:45.55,tot:112.0},
+{id:"11MYntHY5gRazoxfjzqQGpDP6FnAqpsDU",supplier:"A2A",start:"2024-02-01",end:"2024-02-29",kwh:339,energy:55.85,acc:38.15,tot:94.0},
+{id:"16b61L7bbqm4YkeaXTrHKT_laqsc9t517",supplier:"A2A",start:"2024-03-01",end:"2024-03-31",kwh:330,energy:53.36,acc:36.64,tot:90.0},
+{id:"1p6ajti7tMSB20dHU4-HHCTDU_CzRvhyj",supplier:"A2A",start:"2024-04-01",end:"2024-04-30",kwh:268,energy:44.37,acc:32.63,tot:77.0},
+{id:"1oXeO4m92mK-Htg3qlACklrLPMzrtUK9x",supplier:"A2A",start:"2024-05-01",end:"2024-05-31",kwh:250,energy:42.25,acc:28.75,tot:71.0},
+{id:"17D7E4DPLI8Ntl6hUjPvnjFQ4lTL2x0gq",supplier:"A2A",start:"2024-06-01",end:"2024-06-30",kwh:201,energy:35.85,acc:20.15,tot:56.0},
+{id:"1uV-YXEtXV6RLQyySlvO20PF3pjRkum_w",supplier:"A2A",start:"2024-07-01",end:"2024-07-31",kwh:291,energy:53.72,acc:34.28,tot:88.0},
+{id:"1Mt0E2bGrxckVlSBrwkjRbMh3L96YdlJr",supplier:"A2A",start:"2024-08-01",end:"2024-08-31",kwh:179,energy:32.78,acc:22.22,tot:55.0},
+{id:"17FWm-L7eLsxldZ7Wah61WpQERp6BJz8U",supplier:"A2A",start:"2024-09-01",end:"2024-09-30",kwh:249,energy:43.45,acc:29.55,tot:73.0},
+{id:"1a3RhYv9Zx4h77AXxTSACubH0OHYetHkE",supplier:"A2A",start:"2024-10-01",end:"2024-10-31",kwh:263,energy:45.95,acc:31.05,tot:77.0},
+{id:"1BUVu1tepaM6TKEMURilpeOMwXTn4KeQi",supplier:"A2A",start:"2024-11-01",end:"2024-11-30",kwh:318,energy:56.19,acc:38.81,tot:95.0},
+{id:"1PALsXTYDk344BtWE1SivM-UslWDH6XxR",supplier:"A2A",start:"2024-12-01",end:"2024-12-31",kwh:304,energy:55.67,acc:36.33,tot:92.0},
+{id:"1KHPGS6P-JN6I6NFshFIZ0LSDWd9UJLyE",supplier:"A2A",start:"2025-01-01",end:"2025-01-31",kwh:318,energy:61.31,acc:37.69,tot:99.0},
+{id:"1aYnprY4ip0op0mRiZVKszTJ__Bi1L9g1",supplier:"A2A",start:"2025-02-01",end:"2025-02-28",kwh:324,energy:62.76,acc:39.24,tot:102.0},
+{id:"1j7izINGlQhPfo8914VaOHbwaeq5IURZr",supplier:"A2A",start:"2025-03-01",end:"2025-03-31",kwh:358,energy:63.56,acc:42.44,tot:106.0},
+{id:"14GyJ5atN2TpNoZFwW4wZfSVwnOdraKmF",supplier:"A2A",start:"2025-04-01",end:"2025-04-30",kwh:299,energy:51.25,acc:34.75,tot:86.0},
+{id:"1C3bErhbejPoY_rrIaRlNrjy_yRT3dk4T",supplier:"A2A",start:"2025-05-01",end:"2025-05-31",kwh:253,energy:44.43,acc:28.57,tot:73.0},
+{id:"154R1B5a7DlMNEbLhPh7VTFNHbls8Vdmy",supplier:"A2A",start:"2025-06-01",end:"2025-06-30",kwh:240,energy:44.19,acc:28.81,tot:73.0},
+{id:"1RSdBk9GSor3ENBh9K9P5LduRBIetkXlV",supplier:"A2A",start:"2025-07-01",end:"2025-07-31",kwh:301,energy:60.02,acc:34.98,tot:95.0},
+{id:"1ZVpOjxxZ9NTtmGbgjcB0u9wPMCsPis9X",supplier:"A2A",start:"2025-08-01",end:"2025-08-31",kwh:243,energy:44.93,acc:28.07,tot:73.0},
+{id:"1yo2P_yCGD1N1asPFo4AFS2PnJE5hxHPo",supplier:"A2A",start:"2025-09-01",end:"2025-09-30",kwh:102,energy:23.25,acc:16.75,tot:40.0},
+{id:"1wTcY9UfscoY-UkVIimHcy-LDLat-a0hT",supplier:"A2A",start:"2025-10-01",end:"2025-10-31",kwh:209,energy:38.41,acc:24.59,tot:63.0},
+{id:"1zaF8Q0Fh6gFKAG8HGx9WmlMQDokDRwP4",supplier:"A2A",start:"2025-11-01",end:"2025-11-30",kwh:309,energy:55.22,acc:58.4,tot:113.62,note:"conguaglio storico escluso (bolletta pagata 334 €)"},
+{id:"1ukXCVMtMlxI1GCgcaaZx6hnG_mxXZ5LB",supplier:"A2A",start:"2025-12-01",end:"2025-12-31",kwh:422,energy:77.05,acc:47.95,tot:125.0,note:"nuovo contatore"},
+{id:"1Tk_-tavclmA_g9zWPeOKJPUaDpEKHiJg",supplier:"A2A",start:"2026-01-01",end:"2026-01-31",kwh:427,energy:79.3,acc:48.7,tot:128.0},
+{id:"1zx0eSK1CHoQ2SsVVrWuCoSfU_Bz72uKW",supplier:"A2A",start:"2026-02-01",end:"2026-02-28",kwh:344,energy:59.7,acc:40.3,tot:100.0},
+{id:"1ET-DBuiYej4RTRmLG6PXiUflBR679OBJ",supplier:"A2A",start:"2026-03-01",end:"2026-03-31",kwh:336,energy:61.26,acc:38.74,tot:100.0},
+{id:"1rlwkIGbVVKrn-lB54zpa_wOxE6eatNFz",supplier:"A2A",start:"2026-04-01",end:"2026-04-30",kwh:281,energy:48.32,acc:32.68,tot:81.0},
+{id:"1oK-xaN8zZEQIIxq1VkLbBxxbfqYuOLxa",supplier:"A2A",start:"2026-05-01",end:"2026-05-31",kwh:261,energy:45.13,acc:28.87,tot:74.0}
+];
+const MESI = ["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"];
+function fmtIt(d){ const dt=new Date(d+"T00:00:00"); return dt.getDate()+" "+MESI[dt.getMonth()]+" "+String(dt.getFullYear()).slice(2); }
+function periodLabel(b){ return fmtIt(b.start)+" – "+fmtIt(b.end); }
+function eur(n){ return n.toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2})+" €"; }
+function kwh(n){ return Math.round(n).toLocaleString("it-IT")+" kWh"; }
+const totKwh=bills.reduce((s,b)=>s+b.kwh,0), totEne=bills.reduce((s,b)=>s+b.energy,0), totAcc=bills.reduce((s,b)=>s+b.acc,0), totTot=bills.reduce((s,b)=>s+b.tot,0);
+const avgPrice=totTot/totKwh, eneShare=totEne/totTot*100, accShare=totAcc/totTot*100;
+const kpis=[
+ {label:"Consumo totale",value:kwh(totKwh),sub:"01/12/2020 → 31/05/2026"},
+ {label:"Spesa totale",value:eur(totTot),sub:bills.length+" bollette (canone RAI escluso)"},
+ {label:"Quota materia energia",value:eneShare.toFixed(0)+"%",sub:eur(totEne)},
+ {label:"Quota accessori",value:accShare.toFixed(0)+"%",sub:eur(totAcc)+" — trasporto, oneri, imposte, IVA"},
+ {label:"Prezzo medio",value:avgPrice.toFixed(3)+" €/kWh",sub:"media sull'intero periodo"},
+];
+document.getElementById("kpis").innerHTML=kpis.map(k=>`<div class="kpi"><div class="label">${k.label}</div><div class="value">${k.value}</div><div class="sub">${k.sub}</div></div>`).join("");
+const labels=bills.map(periodLabel);
+new Chart(document.getElementById("consumptionChart"),{type:"bar",data:{labels,datasets:[{label:"Consumo (kWh)",data:bills.map(b=>b.kwh),backgroundColor:"#e0483a99",borderColor:"#e0483a",borderWidth:1,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>kwh(ctx.parsed.y)}}},scales:{x:{ticks:{maxRotation:60,minRotation:60,autoSkip:false,font:{size:9}}},y:{title:{display:true,text:"kWh"}}}}});
+new Chart(document.getElementById("costChart"),{type:"bar",data:{labels,datasets:[{label:"Materia energia",data:bills.map(b=>b.energy),backgroundColor:"#e0483a"},{label:"Accessori",data:bills.map(b=>b.acc),backgroundColor:"#f2a007"}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+": "+eur(ctx.parsed.y)}}},scales:{x:{stacked:true,ticks:{maxRotation:60,minRotation:60,autoSkip:false,font:{size:9}}},y:{stacked:true,title:{display:true,text:"€"}}}}});
+const years={};
+function addToYear(y,k,e,a,t){y=String(y);years[y]=years[y]||{kwh:0,energy:0,acc:0,tot:0};years[y].kwh+=k;years[y].energy+=e;years[y].acc+=a;years[y].tot+=t;}
+bills.forEach(b=>{const start=new Date(b.start+"T00:00:00"),end=new Date(b.end+"T00:00:00"),totalDays=Math.max(1,(end-start)/86400000);
+ if(start.getFullYear()===end.getFullYear()){addToYear(start.getFullYear(),b.kwh,b.energy,b.acc,b.tot);}
+ else{let cur=start;while(cur<end){const yE=new Date(cur.getFullYear()+1,0,1),segEnd=end<yE?end:yE,frac=(segEnd-cur)/86400000/totalDays;addToYear(cur.getFullYear(),b.kwh*frac,b.energy*frac,b.acc*frac,b.tot*frac);cur=segEnd;}}});
+const yearKeys=Object.keys(years).sort();
+function yearLabel(y){return (y==="2020"||y==="2026")?y+" *":y;}
+new Chart(document.getElementById("yearConsumptionChart"),{type:"bar",data:{labels:yearKeys.map(yearLabel),datasets:[{label:"Consumo annuo",data:yearKeys.map(y=>Math.round(years[y].kwh)),backgroundColor:"#e0483a99",borderColor:"#e0483a",borderWidth:1,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>kwh(ctx.parsed.y)}}},scales:{y:{title:{display:true,text:"kWh"}}}}});
+new Chart(document.getElementById("yearCostChart"),{type:"bar",data:{labels:yearKeys.map(yearLabel),datasets:[{label:"Materia energia",data:yearKeys.map(y=>+years[y].energy.toFixed(2)),backgroundColor:"#e0483a"},{label:"Accessori",data:yearKeys.map(y=>+years[y].acc.toFixed(2)),backgroundColor:"#f2a007"}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+": "+eur(ctx.parsed.y)}}},scales:{x:{stacked:true},y:{stacked:true,title:{display:true,text:"€"}}}}});
+const supplierColors={SGR:"#8e44ad",Cogeme:"#16a085",A2A:"#2f6fed"};
+function colorFor(i){return supplierColors[bills[i].supplier]||"#5b6572";}
+function alphaColor(h,a){return h+a;}
+const supplierOrder=["SGR","Cogeme","A2A"],supplierAvg={},supplierRange={};
+supplierOrder.forEach(s=>{let sT=0,sK=0,first=-1,last=-1;bills.forEach((b,i)=>{if(b.supplier!==s)return;sT+=b.tot;sK+=b.kwh;if(first===-1)first=i;last=i;});if(last>=0&&last<bills.length-1)last+=1;if(sK>0){supplierAvg[s]=sT/sK;supplierRange[s]=[first,last];}});
+const avgDatasets=supplierOrder.filter(s=>supplierAvg[s]!==undefined).map(s=>{const[first,last]=supplierRange[s];return{label:`Media ${s}: ${supplierAvg[s].toFixed(3)} €/kWh`,data:bills.map((b,i)=>(i>=first&&i<=last)?+supplierAvg[s].toFixed(3):null),borderColor:supplierColors[s],borderDash:[6,4],borderWidth:1.5,pointRadius:0,fill:false,spanGaps:false,tension:0};});
+new Chart(document.getElementById("priceChart"),{type:"line",data:{labels,datasets:[{label:"€/kWh",data:bills.map(b=>b.kwh>0?+(b.tot/b.kwh).toFixed(3):null),borderColor:"#5b6572",backgroundColor:"#5b657222",fill:true,tension:0.25,spanGaps:true,pointRadius:3,pointBackgroundColor:bills.map((b,i)=>colorFor(i)),pointBorderColor:bills.map((b,i)=>colorFor(i)),segment:{borderColor:ctx=>colorFor(ctx.p0DataIndex),backgroundColor:ctx=>alphaColor(colorFor(ctx.p0DataIndex),"33")}},...avgDatasets]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.dataset.label==="€/kWh"?(bills[ctx.dataIndex].supplier+": "+ctx.parsed.y+" €/kWh"):ctx.dataset.label}}},scales:{x:{ticks:{maxRotation:60,minRotation:60,autoSkip:false,font:{size:9}}},y:{title:{display:true,text:"€/kWh"}}}}});
+document.getElementById("priceLegend").innerHTML=supplierOrder.filter(s=>supplierAvg[s]!==undefined).map(s=>`<span><span class="dot" style="background:${supplierColors[s]}"></span>${s} (media ${supplierAvg[s].toFixed(3)} €/kWh, tratteggio)</span>`).join("");
+new gridjs.Grid({columns:["Fornitore","Dal","Al","Consumo (kWh)","Materia energia (€)","Accessori (€)","Totale (€)","€/kWh","Note"],data:bills.map(b=>[b.supplier,fmtIt(b.start),fmtIt(b.end),b.kwh,b.energy.toFixed(2),b.acc.toFixed(2),b.tot.toFixed(2),(b.tot/b.kwh).toFixed(3),b.note||""]),sort:true,search:true,pagination:{limit:12},className:{table:"gridjs-table"}}).render(document.getElementById("table"));
+</script>
+</body>
+</html>
