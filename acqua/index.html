@@ -161,7 +161,7 @@ const avgPrice = totTot/totMcReal;
 const accessoriTot = totAcc + totIva; // "tutto ciò che non è consumo d'acqua puro"
 
 const kpis = [
-  {label:"Consumo reale totale", value:mc(Math.round(totMcReal)), sub:"dic 2020 → giu 2026 (dalle letture)"},
+  {label:"Consumo reale totale", value:mc(Math.round(totMcReal)), sub:"ott 2020 → giu 2026 (dalle letture)"},
   {label:"Spesa totale", value:eur(totTot), sub:bills.length+" bollette"},
   {label:"Quota acqua", value:(totAcqua/totTot*100).toFixed(0)+"%", sub:eur(totAcqua)+" — acquedotto"},
   {label:"Quota scarico", value:(totScarico/totTot*100).toFixed(0)+"%", sub:eur(totScarico)+" — fognatura + depurazione"},
