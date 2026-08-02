@@ -1,0 +1,5 @@
+# Working files created by a monthly run — never publish invoice PDFs.
+water/
+raw_new.json
+final_new.json
+final.json

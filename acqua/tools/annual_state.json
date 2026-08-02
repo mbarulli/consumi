@@ -1,0 +1,16 @@
+{
+ "_comment": "Baseline for annual.py. annualReal mirrors the published acqua/index.html; last_anchor is the newest physical (non-stimata) meter reading already folded into it.",
+ "annualReal": {
+  "2020": 2.4,
+  "2021": 137.1,
+  "2022": 178.1,
+  "2023": 187.3,
+  "2024": 175.7,
+  "2025": 103.9,
+  "2026": 42.5
+ },
+ "last_anchor": {
+  "date": "2026-04-14",
+  "value": 231.0
+ }
+}

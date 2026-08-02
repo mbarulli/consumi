@@ -1,0 +1,1880 @@
+{
+ "ids": {
+  "210226": "1Qi-wbuCWjWTY5HvrsJ6IzIeMPM-SshGm",
+  "210428": "10Lp2ppn9JApkJ9Cmljg3hLHpbWbPoAP_",
+  "210628": "1d-v_-tw6lLBDUJGZffiL5vB7ecNHEXqy",
+  "210827": "1I0NEtVUkwcmiJyWfdHEhelzYifltXqQj",
+  "211027": "12NecvnklJCCFbdBHvSCehJfxZ_F-JkRL",
+  "211227": "18WLy9XO6VDA47HkHBsN9fSsqCnWXQ5fM",
+  "220225": "1X1CZkKFxiQSJTf_MshGwtscqEJRnNlMG",
+  "220427": "1f0mo8ax_UMUV9gbiIJKXhVt-GMbWB3tK",
+  "220627": "1BvKqsTYdPKBSqRVeCsg-aV6LLe3ciVX1",
+  "220826": "14LnqjezKMKN0vKC14ro3BP3sBvzqIvdU",
+  "221026": "1yXeHYp7Hp8OTgWj59xI7APWxEC104r-D",
+  "221228": "1mGW_dXRHmIhNGl23K7WRn6bo_uTnKvUY",
+  "230224": "13Mrtq-tC7fzYVmGmFgrIVVbGmzhKST6e",
+  "230428": "1t17W8mu-G0sAsIUXXUwd2QIPPfIN2Vgp",
+  "230628": "1fxoKAIullWNVC3xdLzmbtC1kVTQbUXuv",
+  "230828": "1-6DiTEedgu4Dq4yxsaEzKLSFU3dKy2bb",
+  "231025": "18Hx-7yNxYT3HgvZrE3ttd0BF4tZTm4Wa",
+  "231227": "1UeoQ3l475ZuqTzFR8p0VjTGTOrA2Deu-",
+  "240226": "1hMzMibV7r3uceXwZs6RHgPxbxU1D7tqG",
+  "240429": "15xlRAFFaCJibFE_VSe5p2BGHNmUSwCTY",
+  "240626": "1-Vc0a7Ix0RJrD-oxOBOKDkshyvGqYWF6",
+  "240828": "1S5J-6qMe6A93-9vxJBsd_3X4WxowijKA",
+  "241028": "1FZjnv3WRcJoexRwMxxYZYv32m_ay-zvt",
+  "241227": "13Yqcfq37W4p1kvr5N1B3jcMxwmvePstf",
+  "250226": "1O4LnEyxL05BmD2j82kXUxaa12Xsnr6hk",
+  "250428": "1ixqAo0ZcEdR0n3sSMl8oK5DGjhVm1GEM",
+  "250630": "1UYEPMHtBmf9wZhri_pAOWIuG49rkGzYx",
+  "250828": "1vQwmwSPK-dMIq23ickq5_BwFNIgsHPtC",
+  "251024": "1LIpvZwUuXRYfkFho3WFk9ufB67SrJIPk",
+  "251229": "1Bv0tHmpXjLzAaSj8wQXLkAbx6GDdg5fv",
+  "260202": "1qTpdzCmYMxJrxzR_atqkF32Q65n72m4C",
+  "260427": "1qGJzCitX-Z3foOg1vyc7zhPq7vnyOB58",
+  "260626": "1uyLcK2y2056wHCCnDiZk76AUDxsTdtki"
+ },
+ "data": [
+  {
+   "file": "210226 - Hera - Acqua.pdf",
+   "start": "23.12.2020",
+   "end": "22.02.2021",
+   "total": 54.84,
+   "iva_rate": 10,
+   "taxable": 49.85,
+   "iva": 4.99,
+   "billed_mc": 20.0,
+   "read_from_kind": "stimata",
+   "read_from_date": "22.12.2020",
+   "read_to_kind": "stimata",
+   "read_to_date": "22.02.2021",
+   "read_from": 2745.0,
+   "read_to": 2765.0,
+   "read_mc": 20.0,
+   "components": [
+    {
+     "kind": "stimato",
+     "from": "23.12.2020",
+     "to": "22.02.2021",
+     "days": 62,
+     "mc": 20.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.6,
+    "fognatura|fixed": 0.3,
+    "depurazione|fixed": 0.41,
+    "acquedotto|tariff": 23.38,
+    "acquedotto|component": 0.54,
+    "fognatura|tariff": 5.27,
+    "fognatura|component": 0.54,
+    "depurazione|tariff": 14.72,
+    "depurazione|component": 0.54,
+    "fondo|fondo": 2.55
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.31,
+    "TOTALETARIFFAACQUEDOTTO": 23.92,
+    "TOTALETARIFFAFOGNATURA": 5.81,
+    "TOTALETARIFFADEPURAZIONE": 15.26,
+    "TOTALEQUOTAFONDOFUGHE": 2.55,
+    "TOTALEACCONTO": 49.85,
+    "TOTALECONTRATTO": 54.84
+   },
+   "unclassified": [
+    "54,84 Totale bolletta Hera Spa €",
+    "10% AliquotaIVA10% 49,85 4,99",
+    "Ammonio mg/L 0,03 0,50",
+    "Fluoruro mg/L 0,11 1,50",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "210428 - Hera - Acqua.pdf",
+   "start": "03.10.2020",
+   "end": "07.04.2021",
+   "total": -41.33,
+   "iva_rate": 10,
+   "taxable": -37.57,
+   "iva": -3.76,
+   "billed_mc": -17.0,
+   "read_from_kind": "intermedia con calcolo",
+   "read_from_date": "02.10.2020",
+   "read_to_kind": "intermedia con calcolo componente ui4 fognatura",
+   "read_to_date": "07.04.2021",
+   "read_from": 2743.0,
+   "read_to": 2748.0,
+   "read_mc": 5.0,
+   "components": [
+    {
+     "kind": "rilevato",
+     "from": "03.10.2020",
+     "to": "07.04.2021",
+     "days": 187,
+     "mc": 24.0
+    },
+    {
+     "kind": "stimato",
+     "from": "08.04.2021",
+     "to": "22.04.2021",
+     "days": 15,
+     "mc": 5.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 5.13,
+    "fognatura|fixed": 0.96,
+    "depurazione|fixed": 1.28,
+    "altro|fixed": -5.18,
+    "acquedotto|tariff": -26.05,
+    "acquedotto|component": 0.81,
+    "fognatura|tariff": -5.49,
+    "fognatura|component": 0.81,
+    "depurazione|tariff": -13.08,
+    "depurazione|component": 0.81,
+    "fondo|fondo": 2.43
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 0.56,
+    "TOTALETARIFFAACQUEDOTTO": 6.47,
+    "TOTALETARIFFAFOGNATURA": 1.47,
+    "TOTALETARIFFADEPURAZIONE": 3.85,
+    "TOTALEQUOTAFONDOFUGHE": 0.62,
+    "TOTALECONGUAGLIO-": -50.54,
+    "TOTALEACCONTO": 12.97,
+    "TOTALECONTRATTO-": -41.33,
+    "TOTALEBOLLETTAHERASPA-": -41.33
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% -37,57 -3,76",
+    "Ammonio mg/L 0,02 0,50",
+    "Fluoruro mg/L 0,10 1,50",
+    "costo acqua minerale: 0,30 €/L Magnesio mg/L 30 -",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "210628 - Hera - Acqua.pdf",
+   "start": "23.04.2021",
+   "end": "22.06.2021",
+   "total": 55.01,
+   "iva_rate": 10,
+   "taxable": 50.01,
+   "iva": 5.0,
+   "billed_mc": 20.0,
+   "read_from_kind": "stimata",
+   "read_from_date": "22.04.2021",
+   "read_to_kind": "stimata",
+   "read_to_date": "22.06.2021",
+   "read_from": 2748.0,
+   "read_to": 2768.0,
+   "read_mc": 20.0,
+   "components": [
+    {
+     "kind": "stimato",
+     "from": "23.04.2021",
+     "to": "22.06.2021",
+     "days": 61,
+     "mc": 20.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.59,
+    "fognatura|fixed": 0.3,
+    "depurazione|fixed": 0.4,
+    "acquedotto|tariff": 23.48,
+    "acquedotto|component": 0.54,
+    "fognatura|tariff": 5.3,
+    "fognatura|component": 0.54,
+    "depurazione|tariff": 14.81,
+    "depurazione|component": 0.54,
+    "fondo|fondo": 2.51
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.29,
+    "TOTALETARIFFAACQUEDOTTO": 24.02,
+    "TOTALETARIFFAFOGNATURA": 5.84,
+    "TOTALETARIFFADEPURAZIONE": 15.35,
+    "TOTALEQUOTAFONDOFUGHE": 2.51,
+    "TOTALEACCONTO": 50.01,
+    "TOTALECONTRATTO": 55.01,
+    "TOTALEBOLLETTAHERASPA": 55.01
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 50,01 5,00",
+    "Ammonio mg/L 0,02 0,50",
+    "Fluoruro mg/L 0,10 1,50",
+    "costo acqua minerale: 0,30 €/L Magnesio mg/L 30 -",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "210827 - Hera - Acqua.pdf",
+   "start": "23.06.2021",
+   "end": "20.08.2021",
+   "total": 51.72,
+   "iva_rate": 10,
+   "taxable": 47.02,
+   "iva": 4.7,
+   "billed_mc": 19.0,
+   "read_from_kind": "stimata",
+   "read_from_date": "22.06.2021",
+   "read_to_kind": "stimata",
+   "read_to_date": "20.08.2021",
+   "read_from": 2768.0,
+   "read_to": 2787.0,
+   "read_mc": 19.0,
+   "components": [
+    {
+     "kind": "stimato",
+     "from": "23.06.2021",
+     "to": "20.08.2021",
+     "days": 59,
+     "mc": 19.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.54,
+    "fognatura|fixed": 0.29,
+    "depurazione|fixed": 0.39,
+    "acquedotto|tariff": 21.68,
+    "acquedotto|component": 0.53,
+    "fognatura|tariff": 5.03,
+    "fognatura|component": 0.53,
+    "depurazione|tariff": 14.07,
+    "depurazione|component": 0.53,
+    "fondo|fondo": 2.43
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.22,
+    "TOTALETARIFFAACQUEDOTTO": 22.21,
+    "TOTALETARIFFAFOGNATURA": 5.56,
+    "TOTALETARIFFADEPURAZIONE": 14.6,
+    "TOTALEQUOTAFONDOFUGHE": 2.43,
+    "TOTALEACCONTO": 47.02,
+    "TOTALECONTRATTO": 51.72,
+    "TOTALEBOLLETTAHERASPA": 51.72
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 47,02 4,70",
+    "Ammonio 0,02 mg/L 0,50",
+    "Fluoruro mg/L 0,10 1,50",
+    "Magnesio 30 costo acqua minerale: 0,30 €/L mg/L -",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "211027 - Hera - Acqua.pdf",
+   "start": "08.04.2021",
+   "end": "13.10.2021",
+   "total": 203.04,
+   "iva_rate": 10,
+   "taxable": 184.58,
+   "iva": 18.46,
+   "billed_mc": -69.0,
+   "invoice_no": "112106484748",
+   "read_from_kind": "intermedia con calcolo",
+   "read_from_date": "07.04.2021",
+   "read_to_kind": "periodica",
+   "read_to_date": "13.10.2021",
+   "read_from": 2743.0,
+   "read_to": 2845.0,
+   "read_mc": 102.0,
+   "components": [
+    {
+     "kind": "rilevato",
+     "from": "08.04.2021",
+     "to": "13.10.2021",
+     "days": 189,
+     "mc": 102.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 4.94,
+    "fognatura|fixed": 0.93,
+    "depurazione|fixed": 1.23,
+    "altro|fixed": -5.07,
+    "acquedotto|tariff": 116.15,
+    "acquedotto|component": 2.76,
+    "fognatura|tariff": 14.15,
+    "fognatura|component": 2.76,
+    "depurazione|tariff": 41.76,
+    "depurazione|component": 2.76,
+    "fondo|fondo": 2.21
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 7.1,
+    "TOTALETARIFFAACQUEDOTTO": 175.79,
+    "TOTALETARIFFAFOGNATURA": 29.76,
+    "TOTALETARIFFADEPURAZIONE": 78.3,
+    "TOTALEQUOTAFONDOFUGHE": 7.77,
+    "TOTALECONGUAGLIO": 188.72,
+    "TOTALECONGUAGLIOANNOSOLARE-": -4.14,
+    "TOTALECONTRATTO": 203.04,
+    "TOTALEBOLLETTAHERASPA": 203.04
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 184,58 18,46",
+    "Ammonio mg/L 0,02 0,50",
+    "Fluoruro mg/L 0,10 1,50",
+    "costo acqua minerale: 0,30 €/L Magnesio mg/L 30 -",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "211227 - Hera - Acqua.pdf",
+   "start": "14.10.2021",
+   "end": "22.12.2021",
+   "total": 53.82,
+   "iva_rate": 10,
+   "taxable": 48.93,
+   "iva": 4.89,
+   "billed_mc": 20.0,
+   "invoice_no": "112107800480",
+   "read_from_kind": "periodica",
+   "read_from_date": "13.10.2021",
+   "read_to_kind": "stimata",
+   "read_to_date": "22.12.2021",
+   "read_from": 2845.0,
+   "read_to": 2865.0,
+   "read_mc": 20.0,
+   "components": [
+    {
+     "kind": "stimato",
+     "from": "14.10.2021",
+     "to": "22.12.2021",
+     "days": 70,
+     "mc": 20.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.83,
+    "fognatura|fixed": 0.34,
+    "depurazione|fixed": 0.46,
+    "acquedotto|tariff": 21.69,
+    "acquedotto|component": 0.54,
+    "fognatura|tariff": 5.3,
+    "fognatura|component": 0.54,
+    "depurazione|tariff": 14.81,
+    "depurazione|component": 0.54,
+    "fondo|fondo": 2.88
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.63,
+    "TOTALETARIFFAACQUEDOTTO": 22.23,
+    "TOTALETARIFFAFOGNATURA": 5.84,
+    "TOTALETARIFFADEPURAZIONE": 15.35,
+    "TOTALEQUOTAFONDOFUGHE": 2.88,
+    "TOTALEACCONTO": 48.93,
+    "TOTALECONTRATTO": 53.82,
+    "TOTALEBOLLETTAHERASPA": 53.82
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 48,93 4,89",
+    "Ammonio mg/L <0,02 0,50",
+    "Fluoruro mg/L <0,10 1,50",
+    "costo acqua minerale: 0,30 €/L Magnesio mg/L 19 -",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "220225 - Hera - Acqua.pdf",
+   "start": "23.12.2021",
+   "end": "21.02.2022",
+   "total": 36.49,
+   "iva_rate": 10,
+   "taxable": 33.17,
+   "iva": 3.32,
+   "billed_mc": 14.0,
+   "invoice_no": "112201308232",
+   "read_from_kind": "stimata",
+   "read_from_date": "22.12.2021",
+   "read_to_kind": "stimata",
+   "read_to_date": "21.02.2022",
+   "read_from": 2865.0,
+   "read_to": 2879.0,
+   "read_mc": 14.0,
+   "components": [
+    {
+     "kind": "stimato",
+     "from": "23.12.2021",
+     "to": "21.02.2022",
+     "days": 61,
+     "mc": 14.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.6,
+    "fognatura|fixed": 0.29,
+    "depurazione|fixed": 0.4,
+    "acquedotto|tariff": 12.68,
+    "acquedotto|component": 0.54,
+    "fognatura|tariff": 3.71,
+    "fognatura|component": 0.54,
+    "depurazione|tariff": 10.37,
+    "depurazione|component": 0.54,
+    "fondo|fondo": 2.5
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.29,
+    "TOTALETARIFFAACQUEDOTTO": 13.22,
+    "TOTALETARIFFAFOGNATURA": 4.25,
+    "TOTALETARIFFADEPURAZIONE": 10.91,
+    "TOTALEQUOTAFONDOFUGHE": 2.5,
+    "TOTALEACCONTO": 33.17,
+    "TOTALECONTRATTO": 36.49,
+    "TOTALEBOLLETTAHERASPA": 36.49
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 33,17 3,32",
+    "Ammonio mg/L <0,02 0,50",
+    "Fluoruro mg/L <0,10 1,50",
+    "costo acqua minerale: 0,30 €/L Magnesio mg/L 19 -",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "220427 - Hera - Acqua.pdf",
+   "components": [],
+   "buckets": {
+    "acquedotto|tariff": 134.51,
+    "fognatura|tariff": 23.3,
+    "depurazione|tariff": 65.17,
+    "altro|fixed": 7.04,
+    "altro|adjust": -76.72,
+    "fondo|fondo": 2.05,
+    "acquedotto|component": 2.9299999999999997,
+    "fognatura|component": 2.9299999999999997,
+    "depurazione|component": 2.9299999999999997
+   },
+   "section_totals": {},
+   "unclassified": [],
+   "start": "14.10.2021",
+   "end": "12.04.2022",
+   "total": 180.55,
+   "taxable": 164.14,
+   "iva": 16.41,
+   "iva_rate": 10,
+   "billed_mc": 51.0,
+   "read_from": 2743.0,
+   "read_to": 2828.0,
+   "read_mc": 85.0,
+   "read_from_date": "14.10.2021",
+   "read_to_date": "12.04.2022",
+   "read_from_kind": "periodica",
+   "read_to_kind": "periodica",
+   "scanned": true
+  },
+  {
+   "file": "220627 - Hera - Acqua.pdf",
+   "start": "13.04.2022",
+   "end": "22.06.2022",
+   "total": 37.05,
+   "iva_rate": 10,
+   "taxable": 33.68,
+   "iva": 3.37,
+   "billed_mc": 13.0,
+   "invoice_no": "112203910400",
+   "read_from_kind": "comunicata dal cliente",
+   "read_from_date": "12.04.2022",
+   "read_to_kind": "stimata",
+   "read_to_date": "22.06.2022",
+   "read_from": 2930.0,
+   "read_to": 2943.0,
+   "read_mc": 13.0,
+   "components": [
+    {
+     "kind": "stimato",
+     "from": "13.04.2022",
+     "to": "22.06.2022",
+     "days": 71,
+     "mc": 13.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.97,
+    "fognatura|fixed": 0.37,
+    "depurazione|fixed": 0.49,
+    "acquedotto|tariff": 12.5,
+    "acquedotto|component": 0.52,
+    "fognatura|tariff": 3.65,
+    "fognatura|component": 0.52,
+    "depurazione|tariff": 10.22,
+    "depurazione|component": 0.52,
+    "fondo|fondo": 2.92
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.83,
+    "TOTALETARIFFAACQUEDOTTO": 13.02,
+    "TOTALETARIFFAFOGNATURA": 4.17,
+    "TOTALETARIFFADEPURAZIONE": 10.74,
+    "TOTALEQUOTAFONDOFUGHE": 2.92,
+    "TOTALEACCONTO": 33.68,
+    "TOTALECONTRATTO": 37.05,
+    "TOTALEBOLLETTAHERASPA": 37.05
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 33,68 3,37",
+    "Ammonio mg/L <0,02 0,50",
+    "Fluoruro mg/L 0,14 1,50",
+    "costo acqua minerale: 0,30 €/L Magnesio mg/L 33 -",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "220826 - Hera - Acqua.pdf",
+   "start": "13.04.2022",
+   "end": "16.08.2022",
+   "total": 201.44,
+   "iva_rate": 10,
+   "taxable": 183.13,
+   "iva": 18.31,
+   "billed_mc": 56.0,
+   "invoice_no": "112205260075",
+   "read_from_kind": "comunicata dal cliente",
+   "read_from_date": "12.04.2022",
+   "read_to_kind": "comunicata dal cliente",
+   "read_to_date": "16.08.2022",
+   "read_from": 2930.0,
+   "read_to": 2999.0,
+   "read_mc": 69.0,
+   "components": [
+    {
+     "kind": "rilevato",
+     "from": "13.04.2022",
+     "to": "16.08.2022",
+     "days": 126,
+     "mc": 69.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 3.49,
+    "fognatura|fixed": 0.65,
+    "depurazione|fixed": 0.87,
+    "altro|fixed": -2.83,
+    "acquedotto|tariff": 111.67,
+    "acquedotto|component": 2.77,
+    "fognatura|tariff": 15.22,
+    "fognatura|component": 2.77,
+    "depurazione|tariff": 43.49,
+    "depurazione|component": 2.77,
+    "fondo|fondo": 2.26
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 5.01,
+    "TOTALETARIFFAACQUEDOTTO": 127.46,
+    "TOTALETARIFFAFOGNATURA": 22.16,
+    "TOTALETARIFFADEPURAZIONE": 57.0,
+    "TOTALEQUOTAFONDOFUGHE": 5.18,
+    "TOTALECONGUAGLIO": 183.13,
+    "TOTALECONTRATTO": 201.44,
+    "TOTALEBOLLETTAHERASPA": 201.44
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 183,13 18,31",
+    "Ammonio mg/L <0,02 0,50",
+    "Fluoruro mg/L 0,14 1,50",
+    "costo acqua minerale: 0,30 €/L Magnesio mg/L 33 -",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "221026 - Hera - Acqua.pdf",
+   "start": "17.08.2022",
+   "end": "21.10.2022",
+   "total": 66.29,
+   "iva_rate": 10,
+   "taxable": 60.26,
+   "iva": 6.03,
+   "billed_mc": 30.0,
+   "invoice_no": "112206531224",
+   "read_from_kind": "comunicata dal cliente",
+   "read_from_date": "16.08.2022",
+   "read_to_kind": "comunicata dal cliente",
+   "read_to_date": "12.10.2022",
+   "read_from": 2999.0,
+   "read_to": 3026.0,
+   "read_mc": 27.0,
+   "components": [
+    {
+     "kind": "rilevato",
+     "from": "17.08.2022",
+     "to": "21.10.2022",
+     "days": 66,
+     "mc": 30.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.83,
+    "fognatura|fixed": 0.34,
+    "depurazione|fixed": 0.46,
+    "acquedotto|tariff": 19.31,
+    "acquedotto|component": 1.2,
+    "fognatura|tariff": 8.44,
+    "fognatura|component": 1.2,
+    "depurazione|tariff": 23.58,
+    "depurazione|component": 1.2,
+    "fondo|fondo": 2.71,
+    "altro|fixed": -0.01
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.63,
+    "TOTALETARIFFAACQUEDOTTO": 48.8,
+    "TOTALETARIFFAFOGNATURA": 9.63,
+    "TOTALETARIFFADEPURAZIONE": 24.78,
+    "TOTALEQUOTAFONDOFUGHE": 2.71,
+    "TOTALECONGUAGLIO": 88.55,
+    "TOTALECONGUAGLIOANNOSOLARE-": -28.29,
+    "TOTALECONTRATTO": 66.29,
+    "TOTALEBOLLETTAHERASPA": 66.29
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 60,26 6,03",
+    "Ammonio mg/L 0,02 0,50",
+    "Cloro resid. libero mg/L 0,05 0,2**",
+    "Fluoruro mg/L <0,10 1,50",
+    "Magnesio mg/L 19 - costo acqua minerale: 0,30 €/L",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "221228 - Hera - Acqua.pdf",
+   "start": "22.10.2022",
+   "end": "22.12.2022",
+   "total": 36.25,
+   "iva_rate": 10,
+   "taxable": 32.95,
+   "iva": 3.3,
+   "billed_mc": 13.0,
+   "invoice_no": "112207950452",
+   "read_from_kind": "intermedia con calcolo",
+   "read_from_date": "21.10.2022",
+   "read_to_kind": "stimata",
+   "read_to_date": "22.12.2022",
+   "read_from": 3029.0,
+   "read_to": 3042.0,
+   "read_mc": 13.0,
+   "components": [
+    {
+     "kind": "stimato",
+     "from": "22.10.2022",
+     "to": "22.12.2022",
+     "days": 62,
+     "mc": 13.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.72,
+    "fognatura|fixed": 0.32,
+    "depurazione|fixed": 0.43,
+    "acquedotto|tariff": 12.5,
+    "acquedotto|component": 0.52,
+    "fognatura|tariff": 3.65,
+    "fognatura|component": 0.52,
+    "depurazione|tariff": 10.22,
+    "depurazione|component": 0.52,
+    "fondo|fondo": 2.55
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.47,
+    "TOTALETARIFFAACQUEDOTTO": 13.02,
+    "TOTALETARIFFAFOGNATURA": 4.17,
+    "TOTALETARIFFADEPURAZIONE": 10.74,
+    "TOTALEQUOTAFONDOFUGHE": 2.55,
+    "TOTALEACCONTO": 32.95,
+    "TOTALECONTRATTO": 36.25,
+    "TOTALEBOLLETTAHERASPA": 36.25
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 32,95 3,30",
+    "Ammonio mg/L 0,02 0,50",
+    "Cloro resid. libero mg/L 0,05 0,2**",
+    "Fluoruro mg/L <0,10 1,50",
+    "costo acqua minerale: 0,30 €/L Magnesio mg/L 19 -",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "230224 - Hera - Acqua.pdf",
+   "start": "22.10.2022",
+   "end": "14.02.2023",
+   "total": 130.1,
+   "iva_rate": 10,
+   "taxable": 118.27,
+   "iva": 11.83,
+   "billed_mc": 38.0,
+   "invoice_no": "112301391223",
+   "read_from_kind": "intermedia con calcolo",
+   "read_from_date": "21.10.2022",
+   "read_to_kind": "comunicata dal cliente",
+   "read_to_date": "14.02.2023",
+   "read_from": 3029.0,
+   "read_to": 3080.0,
+   "read_mc": 51.0,
+   "components": [
+    {
+     "kind": "rilevato",
+     "from": "22.10.2022",
+     "to": "14.02.2023",
+     "days": 116,
+     "mc": 51.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 3.26,
+    "fognatura|fixed": 0.61,
+    "depurazione|fixed": 0.81,
+    "altro|fixed": -2.47,
+    "acquedotto|tariff": 67.56,
+    "acquedotto|component": 2.03,
+    "fognatura|tariff": 10.34,
+    "fognatura|component": 2.03,
+    "depurazione|tariff": 29.85,
+    "depurazione|component": 2.03,
+    "fondo|fondo": 2.22
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 4.68,
+    "TOTALETARIFFAACQUEDOTTO": 82.61,
+    "TOTALETARIFFAFOGNATURA": 16.54,
+    "TOTALETARIFFADEPURAZIONE": 42.62,
+    "TOTALEQUOTAFONDOFUGHE": 4.77,
+    "TOTALECONGUAGLIO": 118.27,
+    "TOTALECONTRATTO": 130.1,
+    "TOTALEBOLLETTAHERASPA": 130.1
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 118,27 11,83",
+    "Ammonio mg/L 0,02 0,50",
+    "Cloro resid. libero mg/L 0,05 0,2**",
+    "Fluoruro mg/L <0,10 1,50",
+    "Magnesio mg/L 19 - costo acqua minerale: 0,30 €/L",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "230428 - Hera - Acqua.pdf",
+   "start": "15.02.2023",
+   "end": "19.04.2023",
+   "total": 79.88,
+   "iva_rate": 10,
+   "taxable": 72.62,
+   "iva": 7.26,
+   "billed_mc": 26.0,
+   "invoice_no": "112302751579",
+   "read_from_kind": "comunicata dal cliente",
+   "read_from_date": "14.02.2023",
+   "read_to_kind": "periodica",
+   "read_to_date": "19.04.2023",
+   "read_from": 3080.0,
+   "read_to": 3106.0,
+   "read_mc": 26.0,
+   "components": [
+    {
+     "kind": "rilevato",
+     "from": "15.02.2023",
+     "to": "19.04.2023",
+     "days": 64,
+     "mc": 26.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.83,
+    "fognatura|fixed": 0.34,
+    "depurazione|fixed": 0.46,
+    "acquedotto|tariff": 35.67,
+    "acquedotto|component": 1.03,
+    "fognatura|tariff": 7.51,
+    "fognatura|component": 1.03,
+    "depurazione|tariff": 21.08,
+    "depurazione|component": 1.03,
+    "fondo|fondo": 2.63,
+    "altro|fixed": 0.01
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.63,
+    "TOTALETARIFFAACQUEDOTTO": 39.96,
+    "TOTALETARIFFAFOGNATURA": 8.57,
+    "TOTALETARIFFADEPURAZIONE": 22.13,
+    "TOTALEQUOTAFONDOFUGHE": 2.63,
+    "TOTALECONGUAGLIO": 75.92,
+    "TOTALECONGUAGLIOANNOSOLARE-": -3.3,
+    "TOTALECONTRATTO": 79.88
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 72,62 7,26",
+    "Ammonio mg/L <0,02 0,50",
+    "Fluoruro mg/L 0,19 1,50",
+    "Magnesio mg/L 34 - costo acqua minerale: 0,30 €/L",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "230628 - Hera - Acqua.pdf",
+   "start": "20.04.2023",
+   "end": "22.06.2023",
+   "total": 101.05,
+   "iva_rate": 10,
+   "taxable": 91.86,
+   "iva": 9.19,
+   "billed_mc": 30.0,
+   "invoice_no": "112304114555",
+   "read_from_kind": "periodica",
+   "read_from_date": "19.04.2023",
+   "read_to_kind": "stimata",
+   "read_to_date": "22.06.2023",
+   "read_from": 3106.0,
+   "read_to": 3136.0,
+   "read_mc": 30.0,
+   "components": [
+    {
+     "kind": "stimato",
+     "from": "20.04.2023",
+     "to": "22.06.2023",
+     "days": 64,
+     "mc": 30.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.83,
+    "fognatura|fixed": 0.34,
+    "depurazione|fixed": 0.46,
+    "acquedotto|tariff": 49.94,
+    "acquedotto|component": 1.2,
+    "fognatura|tariff": 8.71,
+    "fognatura|component": 1.2,
+    "depurazione|tariff": 24.35,
+    "depurazione|component": 1.2,
+    "fondo|fondo": 2.63
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.63,
+    "TOTALETARIFFAACQUEDOTTO": 51.14,
+    "TOTALETARIFFAFOGNATURA": 9.91,
+    "TOTALETARIFFADEPURAZIONE": 25.55,
+    "TOTALEQUOTAFONDOFUGHE": 2.63,
+    "TOTALEACCONTO": 91.86,
+    "TOTALECONTRATTO": 101.05
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 91,86 9,19",
+    "Ammonio mg/L <0,02 0,50",
+    "Fluoruro mg/L 0,19 1,50",
+    "Magnesio mg/L 34 - costo acqua minerale: 0,30 €/L",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "230828 - Hera - Acqua.pdf",
+   "start": "20.04.2023",
+   "end": "14.08.2023",
+   "total": 135.92,
+   "iva_rate": 10,
+   "taxable": 123.56,
+   "iva": 12.36,
+   "billed_mc": 36.0,
+   "invoice_no": "112305555624",
+   "read_from_kind": "periodica",
+   "read_from_date": "19.04.2023",
+   "read_to_kind": "comunicata dal cliente",
+   "read_to_date": "14.08.2023",
+   "read_from": 3106.0,
+   "read_to": 3172.0,
+   "read_mc": 66.0,
+   "components": [
+    {
+     "kind": "rilevato",
+     "from": "20.04.2023",
+     "to": "14.08.2023",
+     "days": 117,
+     "mc": 66.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 3.35,
+    "fognatura|fixed": 0.63,
+    "depurazione|fixed": 0.84,
+    "altro|fixed": -2.63,
+    "acquedotto|tariff": 74.91,
+    "acquedotto|component": 2.58,
+    "fognatura|tariff": 9.24,
+    "fognatura|component": 2.59,
+    "depurazione|tariff": 28.02,
+    "depurazione|component": 2.59,
+    "fondo|fondo": 1.44
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 4.82,
+    "TOTALETARIFFAACQUEDOTTO": 128.63,
+    "TOTALETARIFFAFOGNATURA": 21.74,
+    "TOTALETARIFFADEPURAZIONE": 56.16,
+    "TOTALEQUOTAFONDOFUGHE": 4.07,
+    "TOTALECONGUAGLIO": 123.56,
+    "TOTALECONTRATTO": 135.92
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 123,56 12,36",
+    "Ammonio mg/L <0,02 0,50",
+    "Fluoruro 0,19 mg/L 1,50",
+    "Magnesio mg/L 34 - costo acqua minerale: 0,30 €/L",
+    "Nitrito <0,02 mg/L 0,50"
+   ]
+  },
+  {
+   "file": "231025 - Hera - Acqua.pdf",
+   "start": "15.08.2023",
+   "end": "20.10.2023",
+   "total": 99.06,
+   "iva_rate": 10,
+   "taxable": 90.05,
+   "iva": 9.01,
+   "billed_mc": 30.0,
+   "invoice_no": "112307247206",
+   "read_from_kind": "comunicata dal cliente",
+   "read_from_date": "14.08.2023",
+   "read_to_kind": "stimata",
+   "read_to_date": "20.10.2023",
+   "read_from": 3172.0,
+   "read_to": 3202.0,
+   "read_mc": 30.0,
+   "components": [
+    {
+     "kind": "stimato",
+     "from": "15.08.2023",
+     "to": "20.10.2023",
+     "days": 67,
+     "mc": 30.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.92,
+    "fognatura|fixed": 0.36,
+    "depurazione|fixed": 0.48,
+    "acquedotto|tariff": 49.16,
+    "acquedotto|component": 1.14,
+    "fognatura|tariff": 8.71,
+    "fognatura|component": 1.14,
+    "depurazione|tariff": 24.35,
+    "depurazione|component": 1.14,
+    "fondo|fondo": 1.65
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.76,
+    "TOTALETARIFFAACQUEDOTTO": 50.3,
+    "TOTALETARIFFAFOGNATURA": 9.85,
+    "TOTALETARIFFADEPURAZIONE": 25.49,
+    "TOTALEQUOTAFONDOFUGHE": 1.65,
+    "TOTALEACCONTO": 90.05,
+    "TOTALECONTRATTO": 99.06
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 90,05 9,01",
+    "Ammonio 0,02 mg/L 0,50",
+    "Cloro resid. libero mg/L 0,04 0,2**",
+    "Fluoruro mg/L <0,1 1,50",
+    "Magnesio 12 costo acqua minerale: 0,30 €/L mg/L -",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "231227 - Hera - Acqua.pdf",
+   "start": "15.08.2023",
+   "end": "16.12.2023",
+   "total": 147.31,
+   "iva_rate": 10,
+   "taxable": 133.92,
+   "iva": 13.39,
+   "billed_mc": 39.0,
+   "invoice_no": "112308744448",
+   "read_from_kind": "comunicata dal cliente",
+   "read_from_date": "14.08.2023",
+   "read_to_kind": "intermedia con calcolo",
+   "read_to_date": "23.10.2023",
+   "read_from": 3172.0,
+   "read_to": 3217.0,
+   "read_mc": 45.0,
+   "components": [
+    {
+     "kind": "rilevato",
+     "from": "15.08.2023",
+     "to": "16.12.2023",
+     "days": 124,
+     "mc": 69.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 3.55,
+    "fognatura|fixed": 0.67,
+    "depurazione|fixed": 0.89,
+    "altro|fixed": -2.76,
+    "acquedotto|tariff": 81.58,
+    "acquedotto|component": 2.63,
+    "fognatura|tariff": 10.17,
+    "fognatura|component": 2.63,
+    "depurazione|tariff": 30.52,
+    "depurazione|component": 2.63,
+    "fondo|fondo": 1.41
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 5.11,
+    "TOTALETARIFFAACQUEDOTTO": 134.51,
+    "TOTALETARIFFAFOGNATURA": 22.65,
+    "TOTALETARIFFADEPURAZIONE": 58.64,
+    "TOTALEQUOTAFONDOFUGHE": 3.06,
+    "TOTALECONGUAGLIO": 133.92,
+    "TOTALECONTRATTO": 147.31
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 133,92 13,39",
+    "Ammonio 0,02 mg/L 0,50",
+    "Cloro resid. libero mg/L 0,04 0,2**",
+    "Fluoruro mg/L <0,1 1,50",
+    "Magnesio 12 costo acqua minerale: 0,35 €/L mg/L -",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "240226 - Hera - Acqua.pdf",
+   "start": "17.12.2023",
+   "end": "14.02.2024",
+   "total": 85.79,
+   "iva_rate": 10,
+   "taxable": 77.99,
+   "iva": 7.8,
+   "billed_mc": 26.0,
+   "invoice_no": "112401571009",
+   "read_from_kind": "comunicata dal cliente",
+   "read_from_date": "16.12.2023",
+   "read_to_kind": "comunicata dal cliente",
+   "read_to_date": "14.02.2024",
+   "read_from": 3241.0,
+   "read_to": 3267.0,
+   "read_mc": 26.0,
+   "components": [
+    {
+     "kind": "rilevato",
+     "from": "17.12.2023",
+     "to": "14.02.2024",
+     "days": 60,
+     "mc": 26.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.71,
+    "fognatura|fixed": 0.32,
+    "depurazione|fixed": 0.43,
+    "acquedotto|tariff": 42.44,
+    "acquedotto|component": 0.99,
+    "fognatura|tariff": 7.54,
+    "fognatura|component": 0.99,
+    "depurazione|tariff": 21.1,
+    "depurazione|component": 0.99,
+    "fondo|fondo": 1.48
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.46,
+    "TOTALETARIFFAACQUEDOTTO": 43.43,
+    "TOTALETARIFFAFOGNATURA": 8.53,
+    "TOTALETARIFFADEPURAZIONE": 22.09,
+    "TOTALEQUOTAFONDOFUGHE": 1.48,
+    "TOTALECONGUAGLIO": 77.99,
+    "TOTALECONTRATTO": 85.79
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 77,99 7,80",
+    "Ammonio 0,02 mg/L 0,50",
+    "Cloro resid. libero mg/L 0,04 0,2**",
+    "Fluoruro mg/L <0,1 1,50",
+    "Magnesio 12 costo acqua minerale: 0,35 €/L mg/L -",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "240429 - Hera - Acqua.pdf",
+   "start": "15.02.2024",
+   "end": "10.04.2024",
+   "total": 93.71,
+   "iva_rate": 10,
+   "taxable": 85.19,
+   "iva": 8.52,
+   "billed_mc": 29.0,
+   "invoice_no": "112402939452",
+   "read_from_kind": "comunicata dal cliente",
+   "read_from_date": "14.02.2024",
+   "read_to_kind": "intermedia con calcolo",
+   "read_to_date": "10.04.2024",
+   "read_from": 3267.0,
+   "read_to": 3290.0,
+   "read_mc": 23.0,
+   "components": [
+    {
+     "kind": "rilevato",
+     "from": "15.02.2024",
+     "to": "10.04.2024",
+     "days": 56,
+     "mc": 23.0
+    },
+    {
+     "kind": "stimato",
+     "from": "11.04.2024",
+     "to": "22.04.2024",
+     "days": 12,
+     "mc": 6.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.94,
+    "fognatura|fixed": 0.36,
+    "depurazione|fixed": 0.49,
+    "acquedotto|tariff": 45.44,
+    "acquedotto|component": 1.11,
+    "fognatura|tariff": 8.41,
+    "fognatura|component": 1.11,
+    "depurazione|tariff": 23.54,
+    "depurazione|component": 1.11,
+    "fondo|fondo": 1.68
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 0.49,
+    "TOTALETARIFFAACQUEDOTTO": 10.69,
+    "TOTALETARIFFAFOGNATURA": 1.97,
+    "TOTALETARIFFADEPURAZIONE": 5.1,
+    "TOTALEQUOTAFONDOFUGHE": 0.3,
+    "TOTALECONGUAGLIO": 66.64,
+    "TOTALEACCONTO": 18.55,
+    "TOTALECONTRATTO": 93.71
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 85,19 8,52",
+    "Ammonio <0,02 mg/L 0,50",
+    "Fluoruro mg/L 0,16 1,50 -",
+    "costo acqua minerale: 0,35 €/L",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "240626 - Hera - Acqua.pdf",
+   "start": "23.04.2024",
+   "end": "21.06.2024",
+   "total": 92.59,
+   "iva_rate": 10,
+   "taxable": 84.17,
+   "iva": 8.42,
+   "billed_mc": 28.0,
+   "invoice_no": "112404413103",
+   "read_from_kind": "stimata",
+   "read_from_date": "22.04.2024",
+   "read_to_kind": "stimata",
+   "read_to_date": "21.06.2024",
+   "read_from": 3296.0,
+   "read_to": 3324.0,
+   "read_mc": 28.0,
+   "components": [
+    {
+     "kind": "stimato",
+     "from": "23.04.2024",
+     "to": "21.06.2024",
+     "days": 60,
+     "mc": 28.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.71,
+    "fognatura|fixed": 0.32,
+    "depurazione|fixed": 0.43,
+    "acquedotto|tariff": 46.2,
+    "acquedotto|component": 1.06,
+    "fognatura|tariff": 8.13,
+    "fognatura|component": 1.06,
+    "depurazione|tariff": 22.73,
+    "depurazione|component": 1.06,
+    "fondo|fondo": 1.47
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.46,
+    "TOTALETARIFFAACQUEDOTTO": 47.26,
+    "TOTALETARIFFAFOGNATURA": 9.19,
+    "TOTALETARIFFADEPURAZIONE": 23.79,
+    "TOTALEQUOTAFONDOFUGHE": 1.47,
+    "TOTALEACCONTO": 84.17,
+    "TOTALECONTRATTO": 92.59
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 84,17 8,42",
+    "Ammonio <0,02 mg/L 0,50",
+    "Fluoruro mg/L 0,16 1,50 -",
+    "costo acqua minerale: 0,35 €/L",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "240828 - Hera - Acqua.pdf",
+   "start": "22.06.2024",
+   "end": "22.08.2024",
+   "total": 97.11,
+   "iva_rate": 10,
+   "taxable": 88.28,
+   "iva": 8.83,
+   "billed_mc": 29.0,
+   "invoice_no": "112405934652",
+   "read_from_kind": "stimata",
+   "read_from_date": "21.06.2024",
+   "read_to_kind": "stimata",
+   "read_to_date": "22.08.2024",
+   "read_from": 3324.0,
+   "read_to": 3353.0,
+   "read_mc": 29.0,
+   "components": [
+    {
+     "kind": "stimato",
+     "from": "22.06.2024",
+     "to": "22.08.2024",
+     "days": 62,
+     "mc": 29.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.77,
+    "fognatura|fixed": 0.33,
+    "depurazione|fixed": 0.44,
+    "acquedotto|tariff": 48.95,
+    "acquedotto|component": 1.1,
+    "fognatura|tariff": 8.42,
+    "fognatura|component": 1.1,
+    "depurazione|tariff": 23.54,
+    "depurazione|component": 1.1,
+    "fondo|fondo": 1.53
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.54,
+    "TOTALETARIFFAACQUEDOTTO": 50.05,
+    "TOTALETARIFFAFOGNATURA": 9.52,
+    "TOTALETARIFFADEPURAZIONE": 24.64,
+    "TOTALEQUOTAFONDOFUGHE": 1.53,
+    "TOTALEACCONTO": 88.28,
+    "TOTALECONTRATTO": 97.11
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 88,28 8,83",
+    "Ammonio <0,02 mg/L 0,50",
+    "Fluoruro mg/L 0,16 1,50 -",
+    "costo acqua minerale: 0,35 €/L",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "241028 - Hera - Acqua.pdf",
+   "start": "23.08.2024",
+   "end": "21.10.2024",
+   "total": 92.59,
+   "iva_rate": 10,
+   "taxable": 84.17,
+   "iva": 8.42,
+   "billed_mc": 28.0,
+   "invoice_no": "112407533751",
+   "read_from_kind": "stimata",
+   "read_from_date": "22.08.2024",
+   "read_to_kind": "stimata",
+   "read_to_date": "21.10.2024",
+   "read_from": 3353.0,
+   "read_to": 3381.0,
+   "read_mc": 28.0,
+   "components": [
+    {
+     "kind": "stimato",
+     "from": "23.08.2024",
+     "to": "21.10.2024",
+     "days": 60,
+     "mc": 28.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.71,
+    "fognatura|fixed": 0.32,
+    "depurazione|fixed": 0.43,
+    "acquedotto|tariff": 46.2,
+    "acquedotto|component": 1.06,
+    "fognatura|tariff": 8.13,
+    "fognatura|component": 1.06,
+    "depurazione|tariff": 22.73,
+    "depurazione|component": 1.06,
+    "fondo|fondo": 1.47
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.46,
+    "TOTALETARIFFAACQUEDOTTO": 47.26,
+    "TOTALETARIFFAFOGNATURA": 9.19,
+    "TOTALETARIFFADEPURAZIONE": 23.79,
+    "TOTALEQUOTAFONDOFUGHE": 1.47,
+    "TOTALEACCONTO": 84.17,
+    "TOTALECONTRATTO": 92.59
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 84,17 8,42",
+    "Ammonio <0,02 mg/L 0,50",
+    "Fluoruro mg/L 0,16 1,50 -",
+    "costo acqua minerale: 0,35 €/L",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "241227 - Hera - Acqua.pdf",
+   "start": "11.04.2024",
+   "end": "24.11.2024",
+   "total": 200.0,
+   "iva_rate": 10,
+   "taxable": 181.82,
+   "iva": 18.18,
+   "billed_mc": 41.0,
+   "invoice_no": "112408917036",
+   "read_from_kind": "intermedia con calcolo",
+   "read_from_date": "10.04.2024",
+   "read_to_kind": "intermedia con calcolo totale tariffa acquedotto 243,17 10%",
+   "read_to_date": "08.11.2024",
+   "read_from": 3403.0,
+   "read_to": 3405.0,
+   "read_mc": 2.0,
+   "components": [
+    {
+     "kind": "rilevato",
+     "from": "11.04.2024",
+     "to": "24.11.2024",
+     "days": 228,
+     "mc": 120.0
+    },
+    {
+     "kind": "stimato",
+     "from": "25.11.2024",
+     "to": "20.12.2024",
+     "days": 26,
+     "mc": 12.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 7.91,
+    "fognatura|fixed": 1.48,
+    "depurazione|fixed": 1.98,
+    "altro|fixed": -7.57,
+    "acquedotto|tariff": 104.62,
+    "acquedotto|component": 5.31,
+    "fognatura|tariff": 13.15,
+    "fognatura|component": 5.31,
+    "depurazione|tariff": 42.85,
+    "depurazione|component": 5.31,
+    "fondo|fondo": 1.47
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 1.16,
+    "TOTALETARIFFAACQUEDOTTO": 22.45,
+    "TOTALETARIFFAFOGNATURA": 4.28,
+    "TOTALETARIFFADEPURAZIONE": 11.11,
+    "TOTALEQUOTAFONDOFUGHE": 0.64,
+    "TOTALECONGUAGLIO": 113.52,
+    "TOTALEACCONTO": 39.64,
+    "TOTALERICALCOLOIMPORTIFATTURATI": 35.36,
+    "TOTALECONGUAGLIOANNOSOLARE-": -6.7,
+    "TOTALECONTRATTO": 200.0
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 181,82 18,18",
+    "Ammonio mg/L <0,02 0,50",
+    "Fluoruro 0,16 mg/L 1,50 -",
+    "costo acqua minerale: 0,37 €/L",
+    "Nitrito <0,02 mg/L 0,50"
+   ]
+  },
+  {
+   "file": "250226 - Hera - Acqua.pdf",
+   "start": "21.12.2024",
+   "end": "21.02.2025",
+   "total": 118.91,
+   "iva_rate": 10,
+   "taxable": 108.1,
+   "iva": 10.81,
+   "billed_mc": 32.0,
+   "invoice_no": "112501585451",
+   "read_from_kind": "stimata",
+   "read_from_date": "20.12.2024",
+   "read_to_kind": "stimata",
+   "read_to_date": "21.02.2025",
+   "read_from": 12.0,
+   "read_to": 44.0,
+   "read_mc": 32.0,
+   "components": [
+    {
+     "kind": "stimato",
+     "from": "21.12.2024",
+     "to": "21.02.2025",
+     "days": 63,
+     "mc": 32.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.97,
+    "fognatura|fixed": 0.37,
+    "depurazione|fixed": 0.5,
+    "acquedotto|tariff": 61.22,
+    "acquedotto|component": 1.29,
+    "fognatura|tariff": 10.17,
+    "fognatura|component": 1.29,
+    "depurazione|tariff": 28.45,
+    "depurazione|component": 1.29,
+    "fondo|fondo": 1.55
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.84,
+    "TOTALETARIFFAACQUEDOTTO": 62.51,
+    "TOTALETARIFFAFOGNATURA": 11.46,
+    "TOTALETARIFFADEPURAZIONE": 29.74,
+    "TOTALEQUOTAFONDOFUGHE": 1.55,
+    "TOTALEACCONTO": 108.1,
+    "TOTALECONTRATTO": 118.91
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 108,10 10,81",
+    "Ammonio <0,02 mg/L 0,50",
+    "Fluoruro mg/L 0,16 1,50 -",
+    "costo acqua minerale: 0,37 €/L",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "250428 - Hera - Acqua.pdf",
+   "start": "22.02.2025",
+   "end": "22.04.2025",
+   "total": 116.09,
+   "iva_rate": 10,
+   "taxable": 105.54,
+   "iva": 10.55,
+   "billed_mc": 31.0,
+   "invoice_no": "112503109796",
+   "read_from_kind": "stimata",
+   "read_from_date": "21.02.2025",
+   "read_to_kind": "stimata",
+   "read_to_date": "22.04.2025",
+   "read_from": 44.0,
+   "read_to": 75.0,
+   "read_mc": 31.0,
+   "components": [
+    {
+     "kind": "stimato",
+     "from": "22.02.2025",
+     "to": "22.04.2025",
+     "days": 60,
+     "mc": 31.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.88,
+    "fognatura|fixed": 0.35,
+    "depurazione|fixed": 0.47,
+    "acquedotto|tariff": 60.17,
+    "acquedotto|component": 1.25,
+    "fognatura|tariff": 9.86,
+    "fognatura|component": 1.25,
+    "depurazione|tariff": 27.58,
+    "depurazione|component": 1.25,
+    "fondo|fondo": 1.48
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.7,
+    "TOTALETARIFFAACQUEDOTTO": 61.42,
+    "TOTALETARIFFAFOGNATURA": 11.11,
+    "TOTALETARIFFADEPURAZIONE": 28.83,
+    "TOTALEQUOTAFONDOFUGHE": 1.48,
+    "TOTALEACCONTO": 105.54,
+    "TOTALECONTRATTO": 116.09
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 105,54 10,55",
+    "Ammonio <0,02 mg/L 0,50",
+    "Fluoruro mg/L 0,2 1,50 -",
+    "costo acqua minerale: 0,37 €/L",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "250630 - Hera - Acqua.pdf",
+   "start": "25.11.2024",
+   "end": "29.04.2025",
+   "total": 59.0,
+   "iva_rate": 10,
+   "taxable": 53.64,
+   "iva": 5.36,
+   "billed_mc": 19.0,
+   "invoice_no": "112504705410",
+   "read_from_kind": "di installazione contatore",
+   "read_from_date": "25.11.2024",
+   "read_to_kind": "intermedia con calcolo componente ui3 fognatura",
+   "read_to_date": "29.04.2025",
+   "read_from": 66.0,
+   "read_to": 94.0,
+   "read_mc": 28.0,
+   "components": [
+    {
+     "kind": "rilevato",
+     "from": "25.11.2024",
+     "to": "29.04.2025",
+     "days": 156,
+     "mc": 66.0
+    },
+    {
+     "kind": "stimato",
+     "from": "30.04.2025",
+     "to": "23.06.2025",
+     "days": 55,
+     "mc": 28.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 6.61,
+    "fognatura|fixed": 1.24,
+    "depurazione|fixed": 1.65,
+    "altro|fixed": -6.7,
+    "acquedotto|tariff": 21.06,
+    "acquedotto|component": 3.78,
+    "fognatura|tariff": 3.03,
+    "fognatura|component": 3.78,
+    "depurazione|tariff": 13.88,
+    "depurazione|component": 3.78,
+    "fondo|fondo": 1.53
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.48,
+    "TOTALETARIFFAACQUEDOTTO": 55.02,
+    "TOTALETARIFFAFOGNATURA": 10.03,
+    "TOTALETARIFFADEPURAZIONE": 26.03,
+    "TOTALEQUOTAFONDOFUGHE": 1.35,
+    "TOTALECONGUAGLIO-": -41.27,
+    "TOTALEACCONTO": 94.91,
+    "TOTALECONTRATTO": 59.0
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 53,64 5,36",
+    "Ammonio <0,02 mg/L 0,50",
+    "Fluoruro 0,2 mg/L 1,50 -",
+    "costo acqua minerale: 0,37 €/L",
+    "Nitrito <0,02 mg/L 0,50"
+   ]
+  },
+  {
+   "file": "250828 - Hera - Acqua.pdf",
+   "start": "24.06.2025",
+   "end": "22.08.2025",
+   "total": 116.09,
+   "iva_rate": 10,
+   "taxable": 105.54,
+   "iva": 10.55,
+   "billed_mc": 31.0,
+   "invoice_no": "112506143466",
+   "read_from_kind": "stimata",
+   "read_from_date": "23.06.2025",
+   "read_to_kind": "stimata",
+   "read_to_date": "22.08.2025",
+   "read_from": 94.0,
+   "read_to": 125.0,
+   "read_mc": 31.0,
+   "components": [
+    {
+     "kind": "stimato",
+     "from": "24.06.2025",
+     "to": "22.08.2025",
+     "days": 60,
+     "mc": 31.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.88,
+    "fognatura|fixed": 0.35,
+    "depurazione|fixed": 0.47,
+    "acquedotto|tariff": 60.17,
+    "acquedotto|component": 1.25,
+    "fognatura|tariff": 9.86,
+    "fognatura|component": 1.25,
+    "depurazione|tariff": 27.58,
+    "depurazione|component": 1.25,
+    "fondo|fondo": 1.48
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.7,
+    "TOTALETARIFFAACQUEDOTTO": 61.42,
+    "TOTALETARIFFAFOGNATURA": 11.11,
+    "TOTALETARIFFADEPURAZIONE": 28.83,
+    "TOTALEQUOTAFONDOFUGHE": 1.48,
+    "TOTALEACCONTO": 105.54,
+    "TOTALECONTRATTO": 116.09
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 105,54 10,55",
+    "Ammonio <0,02 mg/L 0,50",
+    "Fluoruro mg/L 0,2 1,50 -",
+    "costo acqua minerale: 0,37 €/L",
+    "Nitrito mg/L <0,02 0,50"
+   ]
+  },
+  {
+   "file": "251024 - Hera - Acqua.pdf",
+   "start": "30.04.2025",
+   "end": "03.10.2025",
+   "total": 101.89,
+   "iva_rate": 10,
+   "taxable": 92.63,
+   "iva": 9.26,
+   "billed_mc": 28.0,
+   "invoice_no": "112507784878",
+   "read_from_kind": "intermedia con calcolo",
+   "read_from_date": "29.04.2025",
+   "read_to_kind": "intermedia con calcolo",
+   "read_to_date": "03.10.2025",
+   "read_from": 144.0,
+   "read_to": 153.0,
+   "read_mc": 9.0,
+   "components": [
+    {
+     "kind": "rilevato",
+     "from": "30.04.2025",
+     "to": "03.10.2025",
+     "days": 157,
+     "mc": 78.0
+    },
+    {
+     "kind": "stimato",
+     "from": "04.10.2025",
+     "to": "21.10.2025",
+     "days": 18,
+     "mc": 9.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 5.49,
+    "fognatura|fixed": 1.03,
+    "depurazione|fixed": 1.37,
+    "altro|fixed": -5.18,
+    "acquedotto|tariff": 48.86,
+    "acquedotto|component": 3.5,
+    "fognatura|tariff": 6.53,
+    "fognatura|component": 3.5,
+    "depurazione|tariff": 22.54,
+    "depurazione|component": 3.5,
+    "fondo|fondo": 1.49
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 0.81,
+    "TOTALETARIFFAACQUEDOTTO": 17.23,
+    "TOTALETARIFFAFOGNATURA": 3.22,
+    "TOTALETARIFFADEPURAZIONE": 8.37,
+    "TOTALEQUOTAFONDOFUGHE": 0.45,
+    "TOTALECONGUAGLIO": 62.55,
+    "TOTALEACCONTO": 30.08,
+    "TOTALECONTRATTO": 101.89
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 92,63 9,26"
+   ]
+  },
+  {
+   "file": "251229 - Hera - Acqua.pdf",
+   "start": "22.10.2025",
+   "end": "22.12.2025",
+   "total": 115.19,
+   "iva_rate": 10,
+   "taxable": 104.72,
+   "iva": 10.47,
+   "billed_mc": 32.0,
+   "invoice_no": "112509384336",
+   "read_from_kind": "stimata",
+   "read_from_date": "21.10.2025",
+   "read_to_kind": "stimata",
+   "read_to_date": "22.12.2025",
+   "read_from": 153.0,
+   "read_to": 185.0,
+   "read_mc": 32.0,
+   "components": [
+    {
+     "kind": "stimato",
+     "from": "22.10.2025",
+     "to": "22.12.2025",
+     "days": 62,
+     "mc": 32.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 1.95,
+    "fognatura|fixed": 0.36,
+    "depurazione|fixed": 0.49,
+    "acquedotto|tariff": 57.94,
+    "acquedotto|component": 1.28,
+    "fognatura|tariff": 10.17,
+    "fognatura|component": 1.28,
+    "depurazione|tariff": 28.45,
+    "depurazione|component": 1.28,
+    "fondo|fondo": 1.52,
+    "altro|fixed": 0.0
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 2.8,
+    "TOTALETARIFFAACQUEDOTTO": 64.47,
+    "TOTALETARIFFAFOGNATURA": 11.46,
+    "TOTALETARIFFADEPURAZIONE": 29.75,
+    "TOTALEQUOTAFONDOFUGHE": 1.53,
+    "TOTALEACCONTO": 110.01,
+    "TOTALECONGUAGLIOANNOSOLARE-": -5.29,
+    "TOTALECONTRATTO": 115.19
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 104,72 10,47"
+   ]
+  },
+  {
+   "file": "260202 - Hera - Acqua.pdf",
+   "start": "04.10.2025",
+   "end": "25.01.2026",
+   "total": 41.75,
+   "iva_rate": 10,
+   "taxable": 37.95,
+   "iva": 3.8,
+   "billed_mc": 13.0,
+   "invoice_no": "112600801490",
+   "read_from_kind": "intermedia con calcolo",
+   "read_from_date": "03.10.2025",
+   "read_to_kind": "di cessazione",
+   "read_to_date": "25.01.2026",
+   "read_from": 144.0,
+   "read_to": 198.0,
+   "read_mc": 54.0,
+   "components": [],
+   "buckets": {
+    "acquedotto|fixed": 3.57,
+    "fognatura|fixed": 0.67,
+    "depurazione|fixed": 0.9,
+    "altro|fixed": -3.6,
+    "acquedotto|tariff": 16.67,
+    "acquedotto|component": 2.17,
+    "fognatura|tariff": 2.49,
+    "fognatura|component": 2.17,
+    "depurazione|tariff": 9.91,
+    "depurazione|component": 2.17,
+    "fondo|fondo": 0.83
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 5.14,
+    "TOTALETARIFFAACQUEDOTTO": 102.11,
+    "TOTALETARIFFAFOGNATURA": 19.35,
+    "TOTALETARIFFADEPURAZIONE": 50.21,
+    "TOTALEQUOTAFONDOFUGHE": 2.81,
+    "TOTALECESSAZIONECONTRATTO": 39.53,
+    "TOTALECONGUAGLIOANNOSOLARE-": -1.58,
+    "TOTALECONGUAGLIOANNOSOLARE": 0.0,
+    "TOTALECONTRATTO": 41.75
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 37,95 3,80"
+   ]
+  },
+  {
+   "file": "260427 - Hera - Acqua.pdf",
+   "start": "26.01.2026",
+   "end": "14.04.2026",
+   "total": 83.82,
+   "iva_rate": 10,
+   "taxable": 76.2,
+   "iva": 7.62,
+   "billed_mc": 26.0,
+   "invoice_no": "112602845333",
+   "read_from_kind": "di attivaz. comunicata dal cliente",
+   "read_from_date": "26.01.2026",
+   "read_to_kind": "periodica",
+   "read_to_date": "14.04.2026",
+   "read_from": 198.0,
+   "read_to": 231.0,
+   "read_mc": 33.0,
+   "components": [
+    {
+     "kind": "rilevato",
+     "from": "26.01.2026",
+     "to": "14.04.2026",
+     "days": 79,
+     "mc": 33.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 2.48,
+    "fognatura|fixed": 0.46,
+    "depurazione|fixed": 0.62,
+    "altro|fixed": -1.17,
+    "acquedotto|tariff": 37.67,
+    "acquedotto|component": 1.33,
+    "fognatura|tariff": 7.99,
+    "fognatura|component": 1.33,
+    "depurazione|tariff": 22.85,
+    "depurazione|component": 1.33,
+    "fondo|fondo": 1.31,
+    "altro|adjust": 0.0
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 3.56,
+    "TOTALETARIFFAACQUEDOTTO": 46.9,
+    "TOTALETARIFFAFOGNATURA": 11.83,
+    "TOTALETARIFFADEPURAZIONE": 30.69,
+    "TOTALEQUOTAFONDOFUGHE": 1.95,
+    "TOTALECONGUAGLIO": 76.2,
+    "TOTALEULTERIORIADDEBITIEACCREDITI": 0.0,
+    "TOTALECONTRATTO": 83.82
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 76,20 7,62"
+   ]
+  },
+  {
+   "file": "260626 - Hera - Acqua.pdf",
+   "start": "15.04.2026",
+   "end": "22.06.2026",
+   "total": 50.45,
+   "iva_rate": 10,
+   "taxable": 45.86,
+   "iva": 4.59,
+   "billed_mc": 17.0,
+   "invoice_no": "112604511614",
+   "read_from_kind": "periodica",
+   "read_from_date": "14.04.2026",
+   "read_to_kind": "stimata",
+   "read_to_date": "22.06.2026",
+   "read_from": 231.0,
+   "read_to": 248.0,
+   "read_mc": 17.0,
+   "components": [
+    {
+     "kind": "stimato",
+     "from": "15.04.2026",
+     "to": "22.06.2026",
+     "days": 69,
+     "mc": 17.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 2.17,
+    "fognatura|fixed": 0.41,
+    "depurazione|fixed": 0.54,
+    "acquedotto|tariff": 18.5,
+    "acquedotto|component": 0.67,
+    "fognatura|tariff": 5.41,
+    "fognatura|component": 0.67,
+    "depurazione|tariff": 15.12,
+    "depurazione|component": 0.67,
+    "fondo|fondo": 1.7
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 3.12,
+    "TOTALETARIFFAACQUEDOTTO": 19.17,
+    "TOTALETARIFFAFOGNATURA": 6.08,
+    "TOTALETARIFFADEPURAZIONE": 15.79,
+    "TOTALEQUOTAFONDOFUGHE": 1.7,
+    "TOTALEACCONTO": 45.86,
+    "TOTALECONTRATTO": 50.45
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 45,86 4,59"
+   ]
+  }
+ ]
+}
