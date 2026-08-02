@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consumi e costi dell'acqua — andamento storico</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gridjs@5.0.2/dist/gridjs.umd.js" integrity="sha384-/XXDzxe4FsGiAe50i/u9pY/Vy/uX654MHB1xoc1BJNnH1WXHhqHga9g3q5tF4gj7" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/gridjs@5.0.2/dist/theme/mermaid.min.css" rel="stylesheet">
+<style>
+  :root{
+    color-scheme: light; --bg:#f7f8fa; --card:#ffffff; --ink:#1c2430; --muted:#5b6572;
+    --acqua:#2f6fed; --scarico:#16a085; --acc:#f2a007; --iva:#9aa3af;
+    --line:#e2e5ea; --real:#1c2430; --stima:#c4c9d1;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 60px;}
+  .back{display:inline-block;font-size:13px;color:var(--muted);text-decoration:none;margin-bottom:14px;}
+  .back:hover{color:#2f6fed;}
+  h1{font-size:22px;margin:0 0 4px;}
+  .subtitle{color:var(--muted);font-size:14px;margin:0 0 24px;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:28px;}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;}
+  .kpi .label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;}
+  .kpi .value{font-size:22px;font-weight:600;margin-top:4px;}
+  .kpi .sub{font-size:12px;color:var(--muted);margin-top:2px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:22px;}
+  .card h2{font-size:15px;margin:0 0 14px;}
+  .chart-box{position:relative;height:320px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media (max-width:860px){.grid2{grid-template-columns:1fr;}}
+  .legend-row{display:flex;flex-wrap:wrap;gap:18px;font-size:12px;color:var(--muted);margin-top:6px;}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;}
+  .notes{font-size:13px;color:var(--muted);line-height:1.6;}
+  .notes b{color:var(--ink);}
+  #table{font-size:13px;}
+  .gridjs-wrapper{border-radius:10px;}
+  .footer{font-size:12px;color:var(--muted);text-align:center;margin-top:10px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../">&larr; Tutti i report</a>
+  <h1>Consumi e costi dell'acqua — andamento storico</h1>
+  <p class="subtitle">33 bollette analizzate · dal 23/12/2020 al 22/06/2026 · gestore: Hera · fatturazione bimestrale</p>
+  <div class="kpis" id="kpis"></div>
+
+  <div class="card">
+    <h2>Andamento del consumo per bolletta (m³)</h2>
+    <div class="chart-box"><canvas id="consumptionChart"></canvas></div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:var(--real)"></span>Consumo reale (differenza di lettura del contatore)</span>
+      <span><span class="dot" style="background:var(--stima)"></span>Consumo fatturato (spesso stimato, con conguagli)</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Ripartizione della spesa per bolletta — acqua vs. scarico vs. accessori</h2>
+    <div class="chart-box"><canvas id="costChart"></canvas></div>
+    <div class="legend-row">
+      <span><span class="dot" style="background:var(--acqua)"></span>Acqua (acquedotto)</span>
+      <span><span class="dot" style="background:var(--scarico)"></span>Scarico (fognatura + depurazione)</span>
+      <span><span class="dot" style="background:var(--acc)"></span>Accessori (quote fisse, componenti, fondo fughe, conguagli)</span>
+      <span><span class="dot" style="background:var(--iva)"></span>IVA 10%</span>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>Consumo annuo reale (m³)</h2>
+      <div class="chart-box"><canvas id="yearConsumptionChart"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Spesa annua — ripartizione (€)</h2>
+      <div class="chart-box"><canvas id="yearCostChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Prezzo medio pagato per m³ (tutto compreso)</h2>
+    <div class="chart-box"><canvas id="priceChart"></canvas></div>
+    <div class="legend-row" id="priceLegend"></div>
+  </div>
+
+  <div class="card">
+    <h2>Dettaglio bollette</h2>
+    <div id="table"></div>
+  </div>
+
+  <div class="card notes">
+    <h2 style="margin-bottom:8px;">Note sui dati</h2>
+    <p><b>Consumo reale vs. fatturato.</b> Hera fattura in gran parte su <i>stime</i>, che vengono poi conguagliate quando arriva una lettura reale (o un'autolettura). Per questo il consumo <i>fatturato</i> di una singola bolletta può risultare negativo — es. <b>Apr 2021 (−17 m³)</b> e <b>Apr–Ott 2021 (−69 m³)</b> sono conguagli che stornano volumi già fatturati in stima. Il grafico per bolletta mostra entrambe le serie: la barra scura è la differenza di lettura del contatore (consumo reale del periodo), quella chiara è il volume come fatturato.</p>
+    <p><b>Periodi sovrapposti.</b> Le bollette a conguaglio coprono lo stesso arco temporale di una o più bollette in acconto precedenti (es. la bolletta reale 13/04→16/08/2022, 69 m³, ingloba la stima 13/04→22/06/2022, 13 m³). Sommare tutti i <i>consumi reali</i> di bolletta conterebbe quindi due volte gli stessi metri cubi: per questo il <b>consumo annuo</b> non è la somma delle bollette, ma è ricostruito dalla sequenza delle <b>letture reali del contatore</b> (periodiche, autoletture, letture di attivazione/cessazione), ripartite pro-die tra gli anni. Questa è la stima più affidabile del consumo effettivo.</p>
+    <p><b>Sostituzione del contatore (nov 2024).</b> Il vecchio contatore (matricola …4097, lettura ~3405) è stato sostituito con uno nuovo (matricola …0884) ripartito da zero. A gennaio 2026 c'è inoltre un cambio contrattuale (lettura di cessazione seguita da lettura di attivazione, entrambe a 198 m³, quindi senza discontinuità di consumo). La ricostruzione annua tiene conto di questi salti.</p>
+    <p><b>2020 e 2026 sono anni parziali</b> — la serie parte da fine dicembre 2020 e l'ultima bolletta disponibile arriva al 22/06/2026, quindi i totali di questi due anni non sono confrontabili con gli anni completi.</p>
+    <p><b>Bolletta cartacea.</b> La bolletta Feb–Apr 2022 (14/10/2021→12/04/2022) è disponibile solo come scansione: i valori sono stati estratti via OCR e verificati sulla quadratura imponibile + IVA = totale.</p>
+    <p><b>Ripartizione della spesa.</b> Per ogni bolletta: <b>acqua</b> = tariffa acquedotto (quota variabile per consumo); <b>scarico</b> = tariffe fognatura + depurazione; <b>accessori</b> = quote fisse giornaliere, componenti perequative UI1–UI4 e di recupero efficienza, quota adesione Fondo Fughe, più eventuali conguagli e acconti (che possono rendere questa voce negativa); <b>IVA</b> = 10%. Dati estratti automaticamente dal testo dei PDF; la somma delle voci quadra al centesimo con l'imponibile di ogni bolletta.</p>
+  </div>
+
+  <p class="footer">Generato a partire dalle bollette dell'acqua dell'abitazione, dal 2020 al 2026.</p>
+</div>
+
+<script>
+const bills = [
+{id:"1Qi-wbuCWjWTY5HvrsJ6IzIeMPM-SshGm",start:"2020-12-23",end:"2021-02-22",mcBill:20.0,mcRead:20.0,acqua:23.38,scarico:19.99,acc:6.48,iva:4.99,tot:54.84},
+{id:"10Lp2ppn9JApkJ9Cmljg3hLHpbWbPoAP_",start:"2020-10-03",end:"2021-04-07",mcBill:-17.0,mcRead:5.0,acqua:-26.05,scarico:-18.57,acc:7.05,iva:-3.76,tot:-41.33,note:"conguaglio: storno stime"},
+{id:"1d-v_-tw6lLBDUJGZffiL5vB7ecNHEXqy",start:"2021-04-23",end:"2021-06-22",mcBill:20.0,mcRead:20.0,acqua:23.48,scarico:20.11,acc:6.42,iva:5.0,tot:55.01},
+{id:"1I0NEtVUkwcmiJyWfdHEhelzYifltXqQj",start:"2021-06-23",end:"2021-08-20",mcBill:19.0,mcRead:19.0,acqua:21.68,scarico:19.1,acc:6.24,iva:4.7,tot:51.72},
+{id:"12NecvnklJCCFbdBHvSCehJfxZ_F-JkRL",start:"2021-04-08",end:"2021-10-13",mcBill:-69.0,mcRead:102.0,acqua:116.15,scarico:55.91,acc:12.52,iva:18.46,tot:203.04,note:"conguaglio su lettura reale"},
+{id:"18WLy9XO6VDA47HkHBsN9fSsqCnWXQ5fM",start:"2021-10-14",end:"2021-12-22",mcBill:20.0,mcRead:20.0,acqua:21.69,scarico:20.11,acc:7.13,iva:4.89,tot:53.82},
+{id:"1X1CZkKFxiQSJTf_MshGwtscqEJRnNlMG",start:"2021-12-23",end:"2022-02-21",mcBill:14.0,mcRead:14.0,acqua:12.68,scarico:14.08,acc:6.41,iva:3.32,tot:36.49},
+{id:"1f0mo8ax_UMUV9gbiIJKXhVt-GMbWB3tK",start:"2021-10-14",end:"2022-04-12",mcBill:51.0,mcRead:85.0,acqua:134.51,scarico:88.47,acc:-58.84,iva:16.41,tot:180.55,note:"cartacea (OCR); conguaglio annuo"},
+{id:"1BvKqsTYdPKBSqRVeCsg-aV6LLe3ciVX1",start:"2022-04-13",end:"2022-06-22",mcBill:13.0,mcRead:13.0,acqua:12.5,scarico:13.87,acc:7.31,iva:3.37,tot:37.05},
+{id:"14LnqjezKMKN0vKC14ro3BP3sBvzqIvdU",start:"2022-04-13",end:"2022-08-16",mcBill:56.0,mcRead:69.0,acqua:111.67,scarico:58.71,acc:12.75,iva:18.31,tot:201.44,note:"conguaglio su lettura reale"},
+{id:"1yXeHYp7Hp8OTgWj59xI7APWxEC104r-D",start:"2022-08-17",end:"2022-10-21",mcBill:30.0,mcRead:27.0,acqua:19.31,scarico:32.02,acc:8.93,iva:6.03,tot:66.29},
+{id:"1mGW_dXRHmIhNGl23K7WRn6bo_uTnKvUY",start:"2022-10-22",end:"2022-12-22",mcBill:13.0,mcRead:13.0,acqua:12.5,scarico:13.87,acc:6.58,iva:3.3,tot:36.25},
+{id:"13Mrtq-tC7fzYVmGmFgrIVVbGmzhKST6e",start:"2022-10-22",end:"2023-02-14",mcBill:38.0,mcRead:51.0,acqua:67.56,scarico:40.19,acc:10.52,iva:11.83,tot:130.1,note:"conguaglio su lettura reale"},
+{id:"1t17W8mu-G0sAsIUXXUwd2QIPPfIN2Vgp",start:"2023-02-15",end:"2023-04-19",mcBill:26.0,mcRead:26.0,acqua:35.67,scarico:28.59,acc:8.36,iva:7.26,tot:79.88},
+{id:"1fxoKAIullWNVC3xdLzmbtC1kVTQbUXuv",start:"2023-04-20",end:"2023-06-22",mcBill:30.0,mcRead:30.0,acqua:49.94,scarico:33.06,acc:8.86,iva:9.19,tot:101.05},
+{id:"1-6DiTEedgu4Dq4yxsaEzKLSFU3dKy2bb",start:"2023-04-20",end:"2023-08-14",mcBill:36.0,mcRead:66.0,acqua:74.91,scarico:37.26,acc:11.39,iva:12.36,tot:135.92,note:"conguaglio su lettura reale"},
+{id:"18Hx-7yNxYT3HgvZrE3ttd0BF4tZTm4Wa",start:"2023-08-15",end:"2023-10-20",mcBill:30.0,mcRead:30.0,acqua:49.16,scarico:33.06,acc:7.83,iva:9.01,tot:99.06},
+{id:"1UeoQ3l475ZuqTzFR8p0VjTGTOrA2Deu-",start:"2023-08-15",end:"2023-12-16",mcBill:39.0,mcRead:45.0,acqua:81.58,scarico:40.69,acc:11.65,iva:13.39,tot:147.31,note:"conguaglio su lettura reale"},
+{id:"1hMzMibV7r3uceXwZs6RHgPxbxU1D7tqG",start:"2023-12-17",end:"2024-02-14",mcBill:26.0,mcRead:26.0,acqua:42.44,scarico:28.64,acc:6.91,iva:7.8,tot:85.79},
+{id:"15xlRAFFaCJibFE_VSe5p2BGHNmUSwCTY",start:"2024-02-15",end:"2024-04-10",mcBill:29.0,mcRead:23.0,acqua:45.44,scarico:31.95,acc:7.8,iva:8.52,tot:93.71},
+{id:"1-Vc0a7Ix0RJrD-oxOBOKDkshyvGqYWF6",start:"2024-04-23",end:"2024-06-21",mcBill:28.0,mcRead:28.0,acqua:46.2,scarico:30.86,acc:7.11,iva:8.42,tot:92.59},
+{id:"1S5J-6qMe6A93-9vxJBsd_3X4WxowijKA",start:"2024-06-22",end:"2024-08-22",mcBill:29.0,mcRead:29.0,acqua:48.95,scarico:31.96,acc:7.37,iva:8.83,tot:97.11},
+{id:"1FZjnv3WRcJoexRwMxxYZYv32m_ay-zvt",start:"2024-08-23",end:"2024-10-21",mcBill:28.0,mcRead:28.0,acqua:46.2,scarico:30.86,acc:7.11,iva:8.42,tot:92.59},
+{id:"13Yqcfq37W4p1kvr5N1B3jcMxwmvePstf",start:"2024-04-11",end:"2024-11-24",mcBill:41.0,mcRead:2.0,acqua:104.62,scarico:56.0,acc:21.2,iva:18.18,tot:200.0,note:"conguaglio; cambio contatore"},
+{id:"1O4LnEyxL05BmD2j82kXUxaa12Xsnr6hk",start:"2024-12-21",end:"2025-02-21",mcBill:32.0,mcRead:32.0,acqua:61.22,scarico:38.62,acc:8.26,iva:10.81,tot:118.91},
+{id:"1ixqAo0ZcEdR0n3sSMl8oK5DGjhVm1GEM",start:"2025-02-22",end:"2025-04-22",mcBill:31.0,mcRead:31.0,acqua:60.17,scarico:37.44,acc:7.93,iva:10.55,tot:116.09},
+{id:"1UYEPMHtBmf9wZhri_pAOWIuG49rkGzYx",start:"2024-11-25",end:"2025-04-29",mcBill:19.0,mcRead:28.0,acqua:21.06,scarico:16.91,acc:15.67,iva:5.36,tot:59.0,note:"conguaglio nuovo contatore"},
+{id:"1vQwmwSPK-dMIq23ickq5_BwFNIgsHPtC",start:"2025-06-24",end:"2025-08-22",mcBill:31.0,mcRead:31.0,acqua:60.17,scarico:37.44,acc:7.93,iva:10.55,tot:116.09},
+{id:"1LIpvZwUuXRYfkFho3WFk9ufB67SrJIPk",start:"2025-04-30",end:"2025-10-03",mcBill:28.0,mcRead:9.0,acqua:48.86,scarico:29.07,acc:14.7,iva:9.26,tot:101.89,note:"conguaglio su lettura reale"},
+{id:"1Bv0tHmpXjLzAaSj8wQXLkAbx6GDdg5fv",start:"2025-10-22",end:"2025-12-22",mcBill:32.0,mcRead:32.0,acqua:57.94,scarico:38.62,acc:8.16,iva:10.47,tot:115.19},
+{id:"1qTpdzCmYMxJrxzR_atqkF32Q65n72m4C",start:"2025-10-04",end:"2026-01-25",mcBill:13.0,mcRead:54.0,acqua:16.67,scarico:12.4,acc:8.88,iva:3.8,tot:41.75,note:"conguaglio; cessazione contratto"},
+{id:"1qGJzCitX-Z3foOg1vyc7zhPq7vnyOB58",start:"2026-01-26",end:"2026-04-14",mcBill:26.0,mcRead:33.0,acqua:37.67,scarico:30.84,acc:7.69,iva:7.62,tot:83.82,note:"attivazione nuovo contratto"},
+{id:"1uyLcK2y2056wHCCnDiZk76AUDxsTdtki",start:"2026-04-15",end:"2026-06-22",mcBill:17.0,mcRead:17.0,acqua:18.5,scarico:20.53,acc:6.83,iva:4.59,tot:50.45},
+];
+
+// Consumo annuo reale, ricostruito dalla sequenza delle letture fisiche del
+// contatore (non dalla somma delle bollette, che si sovrappongono). 2020 e
+// 2026 sono anni parziali.
+const annualReal = {"2020": 2.4, "2021": 137.1, "2022": 178.1, "2023": 187.3, "2024": 175.7, "2025": 103.9, "2026": 42.5};
+
+const MESI = ["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"];
+function fmtIt(d){ const dt=new Date(d+"T00:00:00"); return dt.getDate()+" "+MESI[dt.getMonth()]+" "+String(dt.getFullYear()).slice(2); }
+function periodLabel(b){ return fmtIt(b.start)+" – "+fmtIt(b.end); }
+function eur(n){ return n.toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2})+" €"; }
+function mc(n){ return n.toLocaleString("it-IT")+" m³"; }
+
+// KPIs
+const totTot = bills.reduce((s,b)=>s+b.tot,0);
+const totAcqua = bills.reduce((s,b)=>s+b.acqua,0);
+const totScarico = bills.reduce((s,b)=>s+b.scarico,0);
+const totAcc = bills.reduce((s,b)=>s+b.acc,0);
+const totIva = bills.reduce((s,b)=>s+b.iva,0);
+// consumo reale complessivo: dalla ricostruzione annua (evita i doppi conteggi)
+const totMcReal = Object.values(annualReal).reduce((s,v)=>s+v,0);
+const avgPrice = totTot/totMcReal;
+const accessoriTot = totAcc + totIva; // "tutto ciò che non è consumo d'acqua puro"
+
+const kpis = [
+  {label:"Consumo reale totale", value:mc(Math.round(totMcReal)), sub:"dic 2020 → giu 2026 (dalle letture)"},
+  {label:"Spesa totale", value:eur(totTot), sub:bills.length+" bollette"},
+  {label:"Quota acqua", value:(totAcqua/totTot*100).toFixed(0)+"%", sub:eur(totAcqua)+" — acquedotto"},
+  {label:"Quota scarico", value:(totScarico/totTot*100).toFixed(0)+"%", sub:eur(totScarico)+" — fognatura + depurazione"},
+  {label:"Quota accessori + IVA", value:(accessoriTot/totTot*100).toFixed(0)+"%", sub:eur(accessoriTot)},
+  {label:"Prezzo medio", value:avgPrice.toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2})+" €/m³", sub:"tutto compreso, sui consumi reali"},
+];
+document.getElementById("kpis").innerHTML = kpis.map(k=>`
+  <div class="kpi"><div class="label">${k.label}</div><div class="value">${k.value}</div><div class="sub">${k.sub}</div></div>
+`).join("");
+
+const labels = bills.map(periodLabel);
+
+// Consumo per bolletta: reale (scuro) sovrapposto al fatturato (chiaro)
+new Chart(document.getElementById("consumptionChart"), {
+  type:"bar",
+  data:{ labels, datasets:[
+    { label:"Consumo fatturato", data: bills.map(b=>b.mcBill), backgroundColor:"#c4c9d1", borderColor:"#c4c9d1", borderWidth:1, borderRadius:3, order:2 },
+    { label:"Consumo reale", data: bills.map(b=>b.mcRead), backgroundColor:"#1c243099", borderColor:"#1c2430", borderWidth:1, borderRadius:3, order:1 },
+  ]},
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ctx.dataset.label+": "+mc(ctx.parsed.y) } } },
+    scales:{ x:{ ticks:{ maxRotation:60, minRotation:60, autoSkip:false, font:{size:10} } }, y:{ title:{display:true,text:"m³"} } }
+  }
+});
+
+// Ripartizione spesa per bolletta — stacked
+new Chart(document.getElementById("costChart"), {
+  type:"bar",
+  data:{ labels, datasets:[
+    { label:"Acqua", data: bills.map(b=>b.acqua), backgroundColor:"#2f6fed" },
+    { label:"Scarico", data: bills.map(b=>b.scarico), backgroundColor:"#16a085" },
+    { label:"Accessori", data: bills.map(b=>b.acc), backgroundColor:"#f2a007" },
+    { label:"IVA", data: bills.map(b=>b.iva), backgroundColor:"#9aa3af" },
+  ]},
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ctx.dataset.label+": "+eur(ctx.parsed.y) } } },
+    scales:{ x:{ stacked:true, ticks:{ maxRotation:60, minRotation:60, autoSkip:false, font:{size:10} } }, y:{ stacked:true, title:{display:true,text:"€"} } }
+  }
+});
+
+// Consumo annuo reale (dalla ricostruzione delle letture)
+const yearKeys = Object.keys(annualReal).sort();
+const partial = {"2020":true, "2026":true};
+new Chart(document.getElementById("yearConsumptionChart"), {
+  type:"bar",
+  data:{ labels: yearKeys, datasets:[{
+    label:"Consumo annuo reale",
+    data: yearKeys.map(y=>Math.round(annualReal[y])),
+    backgroundColor: yearKeys.map(y=>partial[y]?"#1c243044":"#1c243099"),
+    borderColor:"#1c2430", borderWidth:1, borderRadius:4
+  }]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => mc(ctx.parsed.y)+(partial[yearKeys[ctx.dataIndex]]?" (anno parziale)":"") } } },
+    scales:{ y:{ title:{display:true,text:"m³"} } } }
+});
+
+// Spesa annua — voci ripartite. Le bollette che attraversano il 31/12 sono
+// ripartite pro-rata (per giorno) tra i due anni, come nei report gas/luce.
+const years = {};
+function addToYear(y, o){ y=String(y); years[y]=years[y]||{acqua:0,scarico:0,acc:0,iva:0,tot:0};
+  years[y].acqua+=o.acqua; years[y].scarico+=o.scarico; years[y].acc+=o.acc; years[y].iva+=o.iva; years[y].tot+=o.tot; }
+bills.forEach(b=>{
+  const start=new Date(b.start+"T00:00:00"), end=new Date(b.end+"T00:00:00");
+  const totalDays=Math.max(1,(end-start)/86400000);
+  if(start.getFullYear()===end.getFullYear()){
+    addToYear(start.getFullYear(), b);
+  } else {
+    let cur=start;
+    while(cur<end){
+      const yearEnd=new Date(cur.getFullYear()+1,0,1);
+      const segEnd=end<yearEnd?end:yearEnd;
+      const f=(segEnd-cur)/86400000/totalDays;
+      addToYear(cur.getFullYear(), {acqua:b.acqua*f,scarico:b.scarico*f,acc:b.acc*f,iva:b.iva*f,tot:b.tot*f});
+      cur=segEnd;
+    }
+  }
+});
+const costYearKeys = Object.keys(years).sort();
+new Chart(document.getElementById("yearCostChart"), {
+  type:"bar",
+  data:{ labels: costYearKeys, datasets:[
+    { label:"Acqua", data: costYearKeys.map(y=>+years[y].acqua.toFixed(2)), backgroundColor:"#2f6fed" },
+    { label:"Scarico", data: costYearKeys.map(y=>+years[y].scarico.toFixed(2)), backgroundColor:"#16a085" },
+    { label:"Accessori", data: costYearKeys.map(y=>+years[y].acc.toFixed(2)), backgroundColor:"#f2a007" },
+    { label:"IVA", data: costYearKeys.map(y=>+years[y].iva.toFixed(2)), backgroundColor:"#9aa3af" },
+  ]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{position:"bottom",labels:{boxWidth:10,font:{size:11}}}, tooltip:{ callbacks:{ label: ctx => ctx.dataset.label+": "+eur(ctx.parsed.y) } } },
+    scales:{ x:{ stacked:true }, y:{ stacked:true, title:{display:true,text:"€"} } } }
+});
+
+// Prezzo medio per m³. I punti mostrano il costo di ogni singola bolletta con
+// lettura reale positiva (il rapporto per bolletta è rumoroso: le bollette a
+// conguaglio addebitano volumi grandi, quelle in acconto piccoli). La linea di
+// riferimento è invece il prezzo medio "vero" tutto compreso — spesa totale
+// diviso il consumo reale ricostruito — lo stesso valore del KPI.
+const priceBills = bills.map(b=> (b.mcRead>0) ? +(b.tot/b.mcRead).toFixed(2) : null);
+const avgEur = avgPrice; // = totTot / totMcReal
+function eurmc(n){ return n.toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2})+" €/m³"; }
+new Chart(document.getElementById("priceChart"), {
+  type:"line",
+  data:{ labels, datasets:[
+    { label:"€/m³ per bolletta", data: priceBills, borderColor:"#2f6fed", backgroundColor:"#2f6fed22", fill:true, tension:0.25, spanGaps:true, pointRadius:3, pointBackgroundColor:"#2f6fed" },
+    { label:"Media tutto compreso", data: labels.map(()=>+avgEur.toFixed(2)), borderColor:"#5b6572", borderDash:[6,4], borderWidth:1.5, pointRadius:0, fill:false },
+  ]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ctx.datasetIndex===0 ? (mc(bills[ctx.dataIndex].mcRead)+" → "+eurmc(ctx.parsed.y)) : ("Media: "+eurmc(ctx.parsed.y)) } } },
+    scales:{ x:{ ticks:{ maxRotation:60, minRotation:60, autoSkip:false, font:{size:10} } }, y:{ title:{display:true,text:"€/m³"} } } }
+});
+document.getElementById("priceLegend").innerHTML =
+  `<span><span class="dot" style="background:#2f6fed"></span>Prezzo per bolletta (solo bollette con lettura reale)</span>`+
+  `<span><span class="dot" style="background:#5b6572"></span>Media tutto compreso: ${eurmc(avgEur)} (tratteggio)</span>`;
+
+// Tabella
+new gridjs.Grid({
+  columns:["Dal","Al","m³ reali","m³ fatturati","Acqua (€)","Scarico (€)","Accessori (€)","IVA (€)","Totale (€)","Note"],
+  data: bills.map(b=>[
+    fmtIt(b.start), fmtIt(b.end), b.mcRead, b.mcBill,
+    b.acqua.toFixed(2), b.scarico.toFixed(2), b.acc.toFixed(2), b.iva.toFixed(2), b.tot.toFixed(2), b.note||""
+  ]),
+  sort:true, search:true, pagination:{ limit:12 },
+  className:{ table:"gridjs-table" }
+}).render(document.getElementById("table"));
+</script>
+</body>
+</html>
