@@ -98,11 +98,29 @@ def parse_scalars(txt):
     if m:
         d["read_from_kind"], d["read_from_date"] = m.group(1).lower(), m.group(2)
         d["read_to_kind"], d["read_to_date"] = m.group(3).lower(), m.group(4)
+        # The window after the header can contain MORE than one (from, to, delta)
+        # triple: conguaglio blocks print their own arithmetic in the same shape.
+        # Taking the first match blindly is how the 11/04→24/11/2024 bill ended up
+        # with 3403→3405 = 2 m³ instead of the physical 3290→3405 = 115 m³.
+        # So collect every internally consistent triple and let build.py decide;
+        # a single candidate stays unambiguous, several get flagged.
+        candidates = []
         for ln in flat[m.end():m.end() + 2500].split("\n"):
             toks = RE_MC3.findall(ln)
-            if len(toks) == 3:
-                d["read_from"], d["read_to"], d["read_mc"] = map(num, toks)
-                break
+            if len(toks) != 3:
+                continue
+            a, b, delta = map(num, toks)
+            if abs((b - a) - delta) > 0.5:
+                continue  # not a reading row, just three numbers side by side
+            cand = {"from": a, "to": b, "mc": delta}
+            if cand not in candidates:
+                candidates.append(cand)
+        if candidates:
+            first = candidates[0]
+            d["read_from"], d["read_to"], d["read_mc"] = first["from"], first["to"], first["mc"]
+            d["read_candidates"] = candidates
+            if len(candidates) > 1:
+                d["read_ambiguous"] = True
     d["components"] = [
         {"kind": k, "from": a, "to": b, "days": int(n), "mc": num(v)}
         for k, a, b, n, v in RE_SUBCONS.findall(flat)]
