@@ -95,6 +95,8 @@
     <p><b>Sostituzione del contatore (nov 2024).</b> Il vecchio contatore (matricola …4097, lettura ~3405) è stato sostituito con uno nuovo (matricola …0884) ripartito da zero. A gennaio 2026 c'è inoltre un cambio contrattuale (lettura di cessazione seguita da lettura di attivazione, entrambe a 198 m³, quindi senza discontinuità di consumo). La ricostruzione annua tiene conto di questi salti.</p>
     <p><b>2020 e 2026 sono anni parziali</b> — la serie parte da fine dicembre 2020 e l'ultima bolletta disponibile arriva al 22/06/2026, quindi i totali di questi due anni non sono confrontabili con gli anni completi.</p>
     <p><b>Bolletta cartacea.</b> La bolletta Feb–Apr 2022 (14/10/2021→12/04/2022) è disponibile solo come scansione: i valori sono stati estratti via OCR e verificati sulla quadratura imponibile + IVA = totale.</p>
+    <p><b>Come leggere il prezzo al m³.</b> Il rapporto totale ÷ metri cubi ha senso solo quando denaro e volume coprono lo stesso periodo. Sulle bollette a conguaglio non è così — il totale salda mesi già fatturati in acconto — e il rapporto produce valori privi di significato (in un caso oltre 100 €/m³). Nel grafico i <b>punti</b> mostrano quindi solo le bollette senza conguaglio, cioè quelle in cui il volume fatturato coincide con quello letto; le <b>linee tratteggiate</b> danno il prezzo davvero pagato in ciascun anno, cioè la spesa annua ripartita divisa per il consumo reale ricostruito dalle letture. Le due grandezze non coincidono: la media annua è più alta perché include conguagli e quote fisse.</p>
+    <p><b>Il prezzo al m³ sale se si consuma meno.</b> Circa un terzo della bolletta (quote fisse giornaliere, componenti perequative, Fondo Fughe) non dipende dai metri cubi. Nel <b>2025</b>, con un consumo reale sceso a 103,9 m³ dai 175,7 m³ del 2024 ma una spesa quasi invariata, il costo effettivo sale a 6,01 €/m³ contro i 3,84 €/m³ dell'anno prima. Non è un rincaro tariffario: è la quota fissa distribuita su meno consumo.</p>
     <p><b>Ripartizione della spesa.</b> Per ogni bolletta: <b>acqua</b> = tariffa acquedotto (quota variabile per consumo); <b>scarico</b> = tariffe fognatura + depurazione; <b>accessori</b> = quote fisse giornaliere, componenti perequative UI1–UI4 e di recupero efficienza, quota adesione Fondo Fughe, più eventuali conguagli e acconti (che possono rendere questa voce negativa); <b>IVA</b> = 10%. Dati estratti automaticamente dal testo dei PDF; la somma delle voci quadra al centesimo con l'imponibile di ogni bolletta.</p>
   </div>
 
@@ -126,7 +128,7 @@ const bills = [
 {id:"1-Vc0a7Ix0RJrD-oxOBOKDkshyvGqYWF6",start:"2024-04-23",end:"2024-06-21",mcBill:28.0,mcRead:28.0,acqua:46.2,scarico:30.86,acc:7.11,iva:8.42,tot:92.59},
 {id:"1S5J-6qMe6A93-9vxJBsd_3X4WxowijKA",start:"2024-06-22",end:"2024-08-22",mcBill:29.0,mcRead:29.0,acqua:48.95,scarico:31.96,acc:7.37,iva:8.83,tot:97.11},
 {id:"1FZjnv3WRcJoexRwMxxYZYv32m_ay-zvt",start:"2024-08-23",end:"2024-10-21",mcBill:28.0,mcRead:28.0,acqua:46.2,scarico:30.86,acc:7.11,iva:8.42,tot:92.59},
-{id:"13Yqcfq37W4p1kvr5N1B3jcMxwmvePstf",start:"2024-04-11",end:"2024-11-24",mcBill:41.0,mcRead:2.0,acqua:104.62,scarico:56.0,acc:21.2,iva:18.18,tot:200.0,note:"conguaglio; cambio contatore"},
+{id:"13Yqcfq37W4p1kvr5N1B3jcMxwmvePstf",start:"2024-04-11",end:"2024-11-24",mcBill:41.0,mcRead:115.0,acqua:104.62,scarico:56.0,acc:21.2,iva:18.18,tot:200.0,note:"conguaglio; chiusura vecchio contatore (lettura 3290 → 3405)"},
 {id:"1O4LnEyxL05BmD2j82kXUxaa12Xsnr6hk",start:"2024-12-21",end:"2025-02-21",mcBill:32.0,mcRead:32.0,acqua:61.22,scarico:38.62,acc:8.26,iva:10.81,tot:118.91},
 {id:"1ixqAo0ZcEdR0n3sSMl8oK5DGjhVm1GEM",start:"2025-02-22",end:"2025-04-22",mcBill:31.0,mcRead:31.0,acqua:60.17,scarico:37.44,acc:7.93,iva:10.55,tot:116.09},
 {id:"1UYEPMHtBmf9wZhri_pAOWIuG49rkGzYx",start:"2024-11-25",end:"2025-04-29",mcBill:19.0,mcRead:28.0,acqua:21.06,scarico:16.91,acc:15.67,iva:5.36,tot:59.0,note:"conguaglio nuovo contatore"},
@@ -260,22 +262,43 @@ new Chart(document.getElementById("yearCostChart"), {
 // conguaglio addebitano volumi grandi, quelle in acconto piccoli). La linea di
 // riferimento è invece il prezzo medio "vero" tutto compreso — spesa totale
 // diviso il consumo reale ricostruito — lo stesso valore del KPI.
-const priceBills = bills.map(b=> (b.mcRead>0) ? +(b.tot/b.mcRead).toFixed(2) : null);
-const avgEur = avgPrice; // = totTot / totMcReal
+// Punti: solo le bollette in cui il denaro e il volume coprono lo stesso periodo,
+// cioè quelle con volume fatturato = volume letto. Sulle bollette a conguaglio il
+// rapporto non ha significato (il totale copre mesi già fatturati in acconto) e
+// produceva valori fino a 100 €/m³ che schiacciavano tutto il resto del grafico.
+const isClean = b => b.mcRead>0 && b.mcBill===b.mcRead;
+const priceBills = bills.map(b=> isClean(b) ? +(b.tot/b.mcRead).toFixed(2) : null);
 function eurmc(n){ return n.toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2})+" €/m³"; }
+
+// Tratteggio: il prezzo "vero" tutto compreso di ciascun anno — spesa annua
+// ripartita diviso il consumo reale ricostruito dalle letture. Il segmento copre
+// le bollette di quell'anno (l'array è ordinato per data di fine).
+const yearAvg = {};
+costYearKeys.forEach(y=>{ if(annualReal[y]>5 && years[y].tot>0) yearAvg[y]=years[y].tot/annualReal[y]; });
+const yearSpan = {};
+bills.forEach((b,i)=>{ const y=b.end.slice(0,4); if(!(y in yearAvg)) return;
+  if(!yearSpan[y]) yearSpan[y]=[i,i]; else yearSpan[y][1]=i; });
+Object.keys(yearSpan).forEach(y=>{ if(yearSpan[y][1]<bills.length-1) yearSpan[y][1]+=1; });
+const YEARCOL=["#2f6fed","#16a085","#e0483a","#f2a007","#8e6bb0","#5b8c3a","#c0399f"];
+const avgYears = Object.keys(yearSpan).sort();
+const avgDatasets = avgYears.map((y,k)=>({
+  label:`Media ${y}: ${eurmc(yearAvg[y])}`,
+  data: bills.map((b,i)=> (i>=yearSpan[y][0] && i<=yearSpan[y][1]) ? +yearAvg[y].toFixed(2) : null),
+  borderColor: YEARCOL[k%YEARCOL.length], borderDash:[6,4], borderWidth:1.5,
+  pointRadius:0, fill:false, spanGaps:false, tension:0 }));
 new Chart(document.getElementById("priceChart"), {
   type:"line",
   data:{ labels, datasets:[
-    { label:"€/m³ per bolletta", data: priceBills, borderColor:"#2f6fed", backgroundColor:"#2f6fed22", fill:true, tension:0.25, spanGaps:true, pointRadius:3, pointBackgroundColor:"#2f6fed" },
-    { label:"Media tutto compreso", data: labels.map(()=>+avgEur.toFixed(2)), borderColor:"#5b6572", borderDash:[6,4], borderWidth:1.5, pointRadius:0, fill:false },
+    { label:"€/m³ per bolletta", data: priceBills, borderColor:"#2f6fed", backgroundColor:"#2f6fed22", fill:true, tension:0.25, spanGaps:false, pointRadius:3, pointBackgroundColor:"#2f6fed" },
+    ...avgDatasets,
   ]},
   options:{ responsive:true, maintainAspectRatio:false,
-    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ctx.datasetIndex===0 ? (mc(bills[ctx.dataIndex].mcRead)+" → "+eurmc(ctx.parsed.y)) : ("Media: "+eurmc(ctx.parsed.y)) } } },
-    scales:{ x:{ ticks:{ maxRotation:60, minRotation:60, autoSkip:false, font:{size:10} } }, y:{ title:{display:true,text:"€/m³"} } } }
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ctx.datasetIndex===0 ? (mc(bills[ctx.dataIndex].mcRead)+" → "+eurmc(ctx.parsed.y)) : ctx.dataset.label } } },
+    scales:{ x:{ ticks:{ maxRotation:60, minRotation:60, autoSkip:false, font:{size:10} } }, y:{ title:{display:true,text:"€/m³"}, beginAtZero:false } } }
 });
 document.getElementById("priceLegend").innerHTML =
-  `<span><span class="dot" style="background:#2f6fed"></span>Prezzo per bolletta (solo bollette con lettura reale)</span>`+
-  `<span><span class="dot" style="background:#5b6572"></span>Media tutto compreso: ${eurmc(avgEur)} (tratteggio)</span>`;
+  `<span><span class="dot" style="background:#2f6fed"></span>Prezzo per bolletta (solo bollette senza conguaglio)</span>`+
+  avgYears.map((y,k)=>`<span><span class="dot" style="background:${YEARCOL[k%YEARCOL.length]}"></span>Media ${y}: ${eurmc(yearAvg[y])} (tratteggio)</span>`).join("");
 
 // Tabella
 new gridjs.Grid({
