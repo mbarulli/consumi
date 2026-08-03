@@ -1331,9 +1331,9 @@
    "read_from_date": "10.04.2024",
    "read_to_kind": "intermedia con calcolo totale tariffa acquedotto 243,17 10%",
    "read_to_date": "08.11.2024",
-   "read_from": 3403.0,
+   "read_from": 3290.0,
    "read_to": 3405.0,
-   "read_mc": 2.0,
+   "read_mc": 115.0,
    "components": [
     {
      "kind": "rilevato",
