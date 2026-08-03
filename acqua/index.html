@@ -289,7 +289,10 @@ const avgDatasets = avgYears.map((y,k)=>({
 new Chart(document.getElementById("priceChart"), {
   type:"line",
   data:{ labels, datasets:[
-    { label:"€/m³ per bolletta", data: priceBills, borderColor:"#2f6fed", backgroundColor:"#2f6fed22", fill:true, tension:0.25, spanGaps:false, pointRadius:3, pointBackgroundColor:"#2f6fed" },
+    // Punti isolati, non una spezzata: le bollette senza conguaglio non sono
+    // consecutive, quindi una linea le unirebbe solo a tratti — e suggerirebbe
+    // una continuità che non c'è. L'andamento lo danno le medie annue.
+    { label:"€/m³ per bolletta", data: priceBills, showLine:false, borderColor:"#2f6fed", pointRadius:4, pointHoverRadius:6, pointBackgroundColor:"#2f6fed", pointBorderColor:"#2f6fed" },
     ...avgDatasets,
   ]},
   options:{ responsive:true, maintainAspectRatio:false,
