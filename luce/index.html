@@ -39,7 +39,7 @@
 <div class="wrap">
   <a class="back" href="../">&larr; Tutti i report</a>
   <h1>Consumi e costi dell'energia elettrica — andamento storico</h1>
-  <p class="subtitle">55 bollette analizzate · dal 01/12/2020 al 30/06/2026 · fornitori: SGR Luce, Cogeme Nuove Energie, A2A Energia</p>
+  <p class="subtitle">56 bollette analizzate · dal 01/12/2020 al 31/07/2026 · fornitori: SGR Luce, Cogeme Nuove Energie, A2A Energia</p>
   <div class="kpis" id="kpis"></div>
   <div class="card">
     <h2>Andamento del consumo per bolletta (kWh)</h2>
@@ -130,7 +130,8 @@ const bills = [
 {id:"1ET-DBuiYej4RTRmLG6PXiUflBR679OBJ",supplier:"A2A",start:"2026-03-01",end:"2026-03-31",kwh:336,energy:61.26,acc:38.74,tot:100.0},
 {id:"1rlwkIGbVVKrn-lB54zpa_wOxE6eatNFz",supplier:"A2A",start:"2026-04-01",end:"2026-04-30",kwh:281,energy:48.32,acc:32.68,tot:81.0},
 {id:"1oK-xaN8zZEQIIxq1VkLbBxxbfqYuOLxa",supplier:"A2A",start:"2026-05-01",end:"2026-05-31",kwh:261,energy:45.13,acc:28.87,tot:74.0},
- {id:"1DJk8XJyf6USJ64hW2uJIWYvMBg_arYLi",supplier:"A2A",start:"2026-06-01",end:"2026-06-30",kwh:282,energy:50.65,acc:33.35,tot:84.0}
+ {id:"1DJk8XJyf6USJ64hW2uJIWYvMBg_arYLi",supplier:"A2A",start:"2026-06-01",end:"2026-06-30",kwh:282,energy:50.65,acc:33.35,tot:84.0},
+ {id:"1Wcm84yvI-9QB6WQzANRi7Od0JtNHHpoC",supplier:"A2A",start:"2026-07-01",end:"2026-07-31",kwh:304,energy:60.52,acc:36.48,tot:97.0}
 ];
 const MESI = ["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"];
 function fmtIt(d){ const dt=new Date(d+"T00:00:00"); return dt.getDate()+" "+MESI[dt.getMonth()]+" "+String(dt.getFullYear()).slice(2); }
@@ -140,7 +141,7 @@ function kwh(n){ return Math.round(n).toLocaleString("it-IT")+" kWh"; }
 const totKwh=bills.reduce((s,b)=>s+b.kwh,0), totEne=bills.reduce((s,b)=>s+b.energy,0), totAcc=bills.reduce((s,b)=>s+b.acc,0), totTot=bills.reduce((s,b)=>s+b.tot,0);
 const avgPrice=totTot/totKwh, eneShare=totEne/totTot*100, accShare=totAcc/totTot*100;
 const kpis=[
- {label:"Consumo totale",value:kwh(totKwh),sub:"01/12/2020 → 30/06/2026"},
+ {label:"Consumo totale",value:kwh(totKwh),sub:"01/12/2020 → 31/07/2026"},
  {label:"Spesa totale",value:eur(totTot),sub:bills.length+" bollette (canone RAI escluso)"},
  {label:"Quota materia energia",value:eneShare.toFixed(0)+"%",sub:eur(totEne)},
  {label:"Quota accessori",value:accShare.toFixed(0)+"%",sub:eur(totAcc)+" — trasporto, oneri, imposte, IVA"},
