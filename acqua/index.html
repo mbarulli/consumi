@@ -43,7 +43,7 @@
 <div class="wrap">
   <a class="back" href="../">&larr; Tutti i report</a>
   <h1>Consumi e costi dell'acqua — andamento storico</h1>
-  <p class="subtitle">33 bollette analizzate · dal 03/10/2020 al 22/06/2026 · gestore: Hera · fatturazione bimestrale</p>
+  <p class="subtitle">34 bollette analizzate · dal 03/10/2020 al 21/08/2026 · gestore: Hera · fatturazione bimestrale</p>
   <div class="kpis" id="kpis"></div>
 
   <div class="card">
@@ -138,6 +138,7 @@ const bills = [
 {id:"1qTpdzCmYMxJrxzR_atqkF32Q65n72m4C",start:"2025-10-04",end:"2026-01-25",mcBill:13.0,mcRead:54.0,acqua:16.67,scarico:12.4,acc:8.88,iva:3.8,tot:41.75,note:"conguaglio; cessazione contratto"},
 {id:"1qGJzCitX-Z3foOg1vyc7zhPq7vnyOB58",start:"2026-01-26",end:"2026-04-14",mcBill:26.0,mcRead:33.0,acqua:37.67,scarico:30.84,acc:7.69,iva:7.62,tot:83.82,note:"attivazione nuovo contratto"},
 {id:"1uyLcK2y2056wHCCnDiZk76AUDxsTdtki",start:"2026-04-15",end:"2026-06-22",mcBill:17.0,mcRead:17.0,acqua:18.5,scarico:20.53,acc:6.83,iva:4.59,tot:50.45},
+{id:"1sRvg4TKipHFlp7Of5QU_5FKr_a4LLVpf",start:"2026-06-23",end:"2026-08-21",mcBill:16.0,mcRead:16.0,acqua:17.41,scarico:19.32,acc:6.98,iva:4.37,tot:48.08},
 ];
 
 // Consumo annuo reale, ricostruito dalla sequenza delle letture fisiche del
@@ -163,7 +164,7 @@ const avgPrice = totTot/totMcReal;
 const accessoriTot = totAcc + totIva; // "tutto ciò che non è consumo d'acqua puro"
 
 const kpis = [
-  {label:"Consumo reale totale", value:mc(Math.round(totMcReal)), sub:"ott 2020 → giu 2026 (dalle letture)"},
+  {label:"Consumo reale totale", value:mc(Math.round(totMcReal)), sub:"ott 2020 → ago 2026 (dalle letture)"},
   {label:"Spesa totale", value:eur(totTot), sub:bills.length+" bollette"},
   {label:"Quota acqua", value:(totAcqua/totTot*100).toFixed(0)+"%", sub:eur(totAcqua)+" — acquedotto"},
   {label:"Quota scarico", value:(totScarico/totTot*100).toFixed(0)+"%", sub:eur(totScarico)+" — fognatura + depurazione"},
