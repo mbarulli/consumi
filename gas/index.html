@@ -40,7 +40,7 @@
 <body>
 <div class="wrap">
   <h1>Consumi e costi del gas — andamento storico</h1>
-  <p class="subtitle">34 bollette analizzate · dal 04/10/2020 al 30/04/2026 · fornitori: SGR Servizi, Cogeme Nuove Energie, A2A Energia</p>
+  <p class="subtitle">35 bollette analizzate · dal 04/10/2020 al 30/06/2026 · fornitori: SGR Servizi, Cogeme Nuove Energie, A2A Energia</p>
   <p style="margin-top:-16px;margin-bottom:24px;"><a href="../" style="color:var(--muted);font-size:13px;">← altri report</a></p>
 
   <div class="kpis" id="kpis"></div>
@@ -128,7 +128,8 @@ const bills = [
 {id:"1Jh3nrhnzzTgo8YJENiGNWQxQamg9hJnm",supplier:"A2A",start:"2025-09-01",end:"2025-10-31",smc:35,gas:36.85,acc:37.15,tot:74.00},
 {id:"1IU4H57ttSfLaz9RvlZLr1j-L_ecejaqz",supplier:"A2A",start:"2025-11-01",end:"2025-12-31",smc:651,gas:247.04,acc:431.96,tot:679.00},
 {id:"1kFaruajRZxAvggWSUFGVoc_2EMh71O2p",supplier:"A2A",start:"2026-01-01",end:"2026-02-28",smc:753,gas:325.51,acc:449.49,tot:775.00},
-{id:"1o_DsBHu_Bwg9yVwKRoDxD9bzRxcyr9kb",supplier:"A2A",start:"2026-03-01",end:"2026-04-30",smc:403,gas:244.67,acc:292.33,tot:537.00}
+{id:"1o_DsBHu_Bwg9yVwKRoDxD9bzRxcyr9kb",supplier:"A2A",start:"2026-03-01",end:"2026-04-30",smc:403,gas:244.67,acc:292.33,tot:537.00},
+{id:"1DqC_q6WtnSHrZoZHcePrOupPKzr5CDdD",supplier:"A2A",start:"2026-05-01",end:"2026-06-30",smc:28,gas:38.26,acc:30.74,tot:69.00}
 ];
 
 const MESI = ["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"];
@@ -147,7 +148,7 @@ const gasShare = totGas/totTot*100;
 const accShare = totAcc/totTot*100;
 
 const kpis = [
-  {label:"Consumo totale", value:smc(totSmc), sub:"04/10/2020 → 30/04/2026"},
+  {label:"Consumo totale", value:smc(totSmc), sub:"04/10/2020 → 30/06/2026"},
   {label:"Spesa totale", value:eur(totTot), sub:bills.length+" bollette"},
   {label:"Quota materia gas", value:gasShare.toFixed(0)+"%", sub:eur(totGas)},
   {label:"Quota accessori", value:accShare.toFixed(0)+"%", sub:eur(totAcc)+" — trasporto, oneri, imposte, IVA"},
