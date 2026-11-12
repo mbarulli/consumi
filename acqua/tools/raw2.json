@@ -33,7 +33,8 @@
   "260202": "1qTpdzCmYMxJrxzR_atqkF32Q65n72m4C",
   "260427": "1qGJzCitX-Z3foOg1vyc7zhPq7vnyOB58",
   "260626": "1uyLcK2y2056wHCCnDiZk76AUDxsTdtki",
-  "260826": "1sRvg4TKipHFlp7Of5QU_5FKr_a4LLVpf"
+  "260826": "1sRvg4TKipHFlp7Of5QU_5FKr_a4LLVpf",
+  "261026": "1L0oAQm4wZ7Lip8dx0D4bNXTGP63ZvlRX"
  },
  "data": [
   {
@@ -1926,6 +1927,65 @@
    },
    "unclassified": [
     "10% Aliquota IVA 10% 43,71 4,37"
+   ]
+  },
+  {
+   "file": "261026 - Hera - Acqua.pdf",
+   "start": "15.04.2026",
+   "end": "20.10.2026",
+   "total": 241.87,
+   "iva_rate": 10,
+   "taxable": 219.88,
+   "iva": 21.99,
+   "billed_mc": 67.0,
+   "invoice_no": "112607417634",
+   "read_from_kind": "periodica",
+   "read_from_date": "14.04.2026",
+   "read_to_kind": "periodica",
+   "read_to_date": "20.10.2026",
+   "read_from": 231.0,
+   "read_to": 331.0,
+   "read_mc": 100.0,
+   "read_candidates": [
+    {
+     "from": 231.0,
+     "to": 331.0,
+     "mc": 100.0
+    }
+   ],
+   "components": [
+    {
+     "kind": "rilevato",
+     "from": "15.04.2026",
+     "to": "20.10.2026",
+     "days": 189,
+     "mc": 100.0
+    }
+   ],
+   "buckets": {
+    "acquedotto|fixed": 5.93,
+    "fognatura|fixed": 1.11,
+    "depurazione|fixed": 1.48,
+    "altro|fixed": -5.82,
+    "acquedotto|tariff": 124.38,
+    "acquedotto|component": 4.02,
+    "fognatura|tariff": 19.98,
+    "fognatura|component": 4.02,
+    "depurazione|tariff": 58.29,
+    "depurazione|component": 4.02,
+    "fondo|fondo": 2.47
+   },
+   "section_totals": {
+    "TOTALEQUOTAFISSA": 8.52,
+    "TOTALETARIFFAACQUEDOTTO": 165.63,
+    "TOTALETARIFFAFOGNATURA": 35.82,
+    "TOTALETARIFFADEPURAZIONE": 92.98,
+    "TOTALEQUOTAFONDOFUGHE": 6.5,
+    "TOTALECONGUAGLIO": 219.88,
+    "TOTALECONTRATTO": 241.87
+   },
+   "unclassified": [
+    "10% Aliquota IVA 10% 219,88 21,99"
    ]
   }
  ]
