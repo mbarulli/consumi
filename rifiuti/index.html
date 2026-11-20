@@ -41,7 +41,7 @@
 <div class="wrap">
   <a class="back" href="../">&larr; Tutti i report</a>
   <h1>Consumi e costi dei rifiuti — andamento storico</h1>
-  <p class="subtitle">17 bollette analizzate · dal 01/09/2020 al 30/04/2026 · gestore: Hera · Tariffa Corrispettiva Puntuale · fatturazione quadrimestrale</p>
+  <p class="subtitle">18 bollette analizzate · dal 01/09/2020 al 31/08/2026 · gestore: Hera · Tariffa Corrispettiva Puntuale · fatturazione quadrimestrale</p>
   <div class="kpis" id="kpis"></div>
   <div class="card">
     <h2>Rifiuto indifferenziato conferito per bolletta (litri) — reale vs. fatturato</h2>
@@ -103,7 +103,8 @@ const bills = [
 {id:"1D0LNdaHNkM0QKkDf79enedbX2rRQKZem",start:"2025-01-01",end:"2025-04-30",litri:200,conf:5,litriMin:276.16,fissa:50.02,varia:23.62,altri:-2.13,imposte:3.49,iva:7.15,tot:82.15},
 {id:"1_gBpvE1B0qTI-7lvyIZo2xKi5mdLsrCc",start:"2025-05-01",end:"2025-08-31",litri:40,conf:1,litriMin:283.07,fissa:51.88,varia:24.79,altri:1.02,imposte:3.76,iva:7.77,tot:89.22},
 {id:"13dcTwKhEAVy_m0vEiQJXqpcllwiZSESs",start:"2025-09-01",end:"2025-12-31",litri:240,conf:6,litriMin:280.76,fissa:51.44,varia:24.6,altri:2.54,imposte:3.82,iva:7.86,tot:90.26},
-{id:"1iGvr6gOsNXUrAMR9iSSFBeglEmzK_UQ7",start:"2026-01-01",end:"2026-04-30",litri:200,conf:5,litriMin:276.16,fissa:51.28,varia:24.75,altri:3.22,imposte:3.73,iva:7.93,tot:90.91}
+{id:"1iGvr6gOsNXUrAMR9iSSFBeglEmzK_UQ7",start:"2026-01-01",end:"2026-04-30",litri:200,conf:5,litriMin:276.16,fissa:51.28,varia:24.75,altri:3.22,imposte:3.73,iva:7.93,tot:90.91},
+{id:"1-LVufKhPYcIg-IJ8sgdb9yBg6Xq8eOM7",start:"2026-05-01",end:"2026-08-31",litri:240,conf:6,litriMin:283.06,fissa:52.8,varia:25.23,altri:1.73,imposte:3.85,iva:7.98,tot:91.59}
 ];
 // Nessuna bolletta attraversa il 31 dicembre (i periodi sono gen-apr / mag-ago / set-dic),
 // quindi i totali annui sono semplici somme: si ricalcolano da soli quando si aggiunge una bolletta.
@@ -125,7 +126,7 @@ const totLitri=bills.reduce((s,b)=>s+b.litri,0), totConf=bills.reduce((s,b)=>s+b
 const totTot=bills.reduce((s,b)=>s+b.tot,0);
 const totFissa=bills.reduce((s,b)=>s+b.fissa,0), totVaria=bills.reduce((s,b)=>s+b.varia,0);
 const kpis=[
- {label:"Rifiuto conferito",value:litri(totLitri),sub:totConf+" svuotamenti · 01/09/2020 → 30/04/2026"},
+ {label:"Rifiuto conferito",value:litri(totLitri),sub:totConf+" svuotamenti · 01/09/2020 → 31/08/2026"},
  {label:"Spesa totale",value:eur(totTot),sub:bills.length+" bollette"},
  {label:"Quota fissa",value:(totFissa/totTot*100).toFixed(0)+"%",sub:eur(totFissa)+" — fissa + normalizzata"},
  {label:"Quota variabile",value:(totVaria/totTot*100).toFixed(0)+"%",sub:eur(totVaria)+" — base + aggiuntiva"},
